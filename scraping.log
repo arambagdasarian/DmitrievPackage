@@ -1,0 +1,92 @@
+2025-06-27 02:03:30,502 - INFO - Navigating to start URL
+2025-06-27 02:03:39,899 - INFO - Configuring search parameters
+2025-06-27 02:03:56,651 - WARNING - Couldn't click checkbox at /html/body/table[1]/tbody/tr[3]/td/article/tbody/tr[2]/td/form/table[2]/tbody/tr[2]/td[1]/input[17]: Message: 
+Stacktrace:
+0   chromedriver                        0x000000010307c3cc cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000103074694 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102bb1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000102bf91bc cxxbridge1$string$len + 381468
+4   chromedriver                        0x0000000102c3a044 cxxbridge1$string$len + 647332
+5   chromedriver                        0x0000000102bed3f8 cxxbridge1$string$len + 332888
+6   chromedriver                        0x00000001030407f0 cxxbridge1$str$ptr + 2585200
+7   chromedriver                        0x0000000103043ac0 cxxbridge1$str$ptr + 2598208
+8   chromedriver                        0x0000000103021dc4 cxxbridge1$str$ptr + 2459716
+9   chromedriver                        0x0000000103044338 cxxbridge1$str$ptr + 2600376
+10  chromedriver                        0x0000000103013650 cxxbridge1$str$ptr + 2400464
+11  chromedriver                        0x000000010306429c cxxbridge1$str$ptr + 2731292
+12  chromedriver                        0x0000000103064428 cxxbridge1$str$ptr + 2731688
+13  chromedriver                        0x00000001030742e0 cxxbridge1$str$ptr + 2796896
+14  libsystem_pthread.dylib             0x0000000187ece034 _pthread_start + 136
+15  libsystem_pthread.dylib             0x0000000187ec8e3c thread_start + 8
+
+2025-06-27 02:03:59,785 - INFO - Starting category processing
+2025-06-27 02:03:59,786 - INFO - Processing category menu page 1
+2025-06-27 02:04:00,973 - INFO - Found 80 categories on page 1
+2025-06-27 02:04:00,996 - INFO - Clicking category: Connect! Мир связи
+2025-06-27 02:04:02,741 - INFO - Processing article page 1
+2025-06-27 02:04:04,605 - INFO - No more article pages in this category
+2025-06-27 02:04:06,145 - INFO - Skipping PDF/archive category: Авиатранспортное обозрение (PDF-версия)
+2025-06-27 02:04:06,158 - INFO - Clicking category: АиФ - Москва
+2025-06-27 02:04:08,311 - INFO - Processing article page 1
+2025-06-27 02:04:23,251 - INFO - No more article pages in this category
+2025-06-27 02:04:24,796 - INFO - Skipping PDF/archive category: АиФ - Москва (PDF-версия)
+2025-06-27 02:04:24,810 - INFO - Clicking category: АиФ - Приложения (Москва)
+2025-06-27 02:04:26,882 - INFO - Processing article page 1
+2025-06-27 02:04:34,416 - INFO - No more article pages in this category
+2025-06-27 02:04:35,961 - INFO - Skipping PDF/archive category: Банковское обозрение (PDF-версия)
+2025-06-27 02:04:35,975 - INFO - Skipping PDF/archive category: Бизнес-журнал (PDF-версия)
+2025-06-27 02:04:35,986 - INFO - Skipping PDF/archive category: Бизнес-журнал (Москва) (PDF-версия)
+2025-06-27 02:04:35,995 - INFO - Clicking category: БОСС (bossmag.ru)
+2025-06-27 02:04:38,229 - INFO - Processing article page 1
+2025-06-27 02:04:45,760 - INFO - No more article pages in this category
+2025-06-27 02:04:47,299 - INFO - Clicking category: Бухгалтерия и банки
+2025-06-27 02:04:49,313 - INFO - Processing article page 1
+2025-06-27 02:04:51,168 - INFO - No more article pages in this category
+2025-06-27 02:04:52,712 - INFO - Skipping PDF/archive category: Бухгалтерия и банки (PDF-версия)
+2025-06-27 02:04:52,725 - INFO - Clicking category: Деловой журнал Профиль
+2025-06-27 02:04:54,896 - INFO - Processing article page 1
+2025-06-27 02:05:13,366 - INFO - No more article pages in this category
+2025-06-27 02:05:14,913 - INFO - Skipping PDF/archive category: Деловой журнал Профиль (PDF-версия)
+2025-06-27 02:05:14,928 - INFO - Clicking category: Ежедневная деловая газета РБК
+2025-06-27 02:05:17,535 - INFO - Processing article page 1
+2025-06-27 02:05:36,098 - INFO - No more article pages in this category
+2025-06-27 02:05:37,645 - INFO - Skipping PDF/archive category: Ежедневная деловая газета РБК (PDF-версия)
+2025-06-27 02:05:37,661 - INFO - Clicking category: Журнал РБК
+2025-06-27 02:05:39,910 - INFO - Processing article page 1
+2025-06-27 02:05:52,830 - INFO - No more article pages in this category
+2025-06-27 02:05:54,372 - INFO - Clicking category: Известия
+2025-06-27 02:05:56,651 - INFO - Processing article page 1
+2025-06-27 02:06:15,583 - INFO - No more article pages in this category
+2025-06-27 02:06:17,125 - INFO - Skipping PDF/archive category: Известия (PDF-версия)
+2025-06-27 02:06:17,138 - INFO - Skipping PDF/archive category: ИнформКурьер - Связь (PDF-версия)
+2025-06-27 02:06:17,148 - INFO - Clicking category: Коммерсантъ
+2025-06-27 02:06:19,387 - INFO - Processing article page 1
+2025-06-27 02:06:37,889 - INFO - No more article pages in this category
+2025-06-27 02:06:39,430 - INFO - Skipping PDF/archive category: Коммерсантъ (PDF-версия)
+2025-06-27 02:06:39,443 - INFO - Skipping PDF/archive category: Коммерсантъ (архив - 2019)
+2025-06-27 02:06:39,453 - INFO - Clicking category: Коммерсантъ (Приложение)
+2025-06-27 02:06:41,912 - INFO - Processing article page 1
+2025-06-27 02:07:01,067 - INFO - No more article pages in this category
+2025-06-27 02:07:02,613 - INFO - Skipping PDF/archive category: Коммерсантъ (Приложение) (PDF-версия)
+2025-06-27 02:07:02,627 - INFO - Skipping PDF/archive category: Коммерсантъ ВЛАСТЬ (PDF-версия)
+2025-06-27 02:07:02,638 - INFO - Skipping PDF/archive category: Коммерсантъ ДЕНЬГИ (PDF-версия)
+2025-06-27 02:07:02,647 - INFO - Skipping PDF/archive category: Коммунальный комплекс России (PDF-версия)
+2025-06-27 02:07:02,657 - INFO - Clicking category: Компания
+2025-06-27 02:07:04,740 - INFO - Processing article page 1
+2025-06-27 02:07:06,657 - INFO - No more article pages in this category
+2025-06-27 02:07:08,198 - INFO - Skipping PDF/archive category: Компания (PDF-версия)
+2025-06-27 02:07:08,211 - INFO - Clicking category: Комсомольская правда
+2025-06-27 02:07:10,479 - INFO - Processing article page 1
+2025-06-27 02:07:28,942 - INFO - No more article pages in this category
+2025-06-27 02:07:30,488 - INFO - Skipping PDF/archive category: Комсомольская правда - Еженедельник (PDF-версия)
+2025-06-27 02:07:30,502 - INFO - Skipping PDF/archive category: Комсомольская правда - Москва (PDF-версия)
+2025-06-27 02:07:30,513 - INFO - Clicking category: Красная звезда
+2025-06-27 02:07:32,596 - INFO - Processing article page 1
+2025-06-27 02:07:43,029 - INFO - No more article pages in this category
+2025-06-27 02:07:44,574 - INFO - Skipping PDF/archive category: Крестьянка (PDF-версия)
+2025-06-27 02:07:44,590 - INFO - Clicking category: Медицинский Вестник (medvestnik.ru)
+2025-06-27 02:07:46,841 - INFO - Processing article page 1
+2025-06-27 02:08:03,487 - INFO - No more article pages in this category
+2025-06-27 02:08:05,032 - INFO - Skipping PDF/archive category: Металлургический бюллетень (PDF-версия)
+2025-06-27 02:08:05,047 - INFO - Clicking category: МК
+2025-06-27 02:08:08,228 - INFO - Processing article page 1
