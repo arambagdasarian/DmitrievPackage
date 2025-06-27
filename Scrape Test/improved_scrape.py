@@ -1,22 +1,22 @@
+import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException
 import csv
 import time
 from bs4 import BeautifulSoup
 
-# --- Configuration ---
 START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
 USERNAME = "X240451"
 PASSWORD = "AZoeypewc1#"
-CHROMEDRIVER_PATH = "./chromedriver"
+CHROMEDRIVER_PATH = "../chromedriver"
 
 def plausible_author(val):
     if not val: return False
@@ -38,48 +38,43 @@ def plausible_title(val):
     if any(bad in val for bad in badwords): return False
     return True
 
-def extract_from_pre(pre_htmls):
-    all_text = []
-    for pre_html in pre_htmls:
-        soup = BeautifulSoup(pre_html, "html.parser")
-        all_text.append(soup.get_text("\n"))
-    full_text = "\n".join(all_text)
-    lines = [line.strip() for line in full_text.split('\n') if line.strip()]
-    data = {'source':'','date':'','author':'','title':'','body':''}
-    for i, line in enumerate(lines):
-        if line.startswith('Источник:'):
-            val = line.replace('Источник:', '').strip()
-            data['source'] = val if plausible_source(val) else ""
-        elif line.startswith('Дата выпуска:'):
-            val = line.replace('Дата выпуска:', '').strip()
-            data['date'] = val if val else ""
-        elif line.startswith('Заглавие:'):
-            val = line.replace('Заглавие:', '').strip()
-            data['title'] = val if plausible_title(val) else ""
-            data['body'] = '\n'.join(lines[i+1:]).strip()
-            break
-    for pre_html in pre_htmls:
-        pre_soup = BeautifulSoup(pre_html, "html.parser")
-        found_author = False
-        for tag in pre_soup.descendants:
-            if tag.name == 'b' and found_author:
-                val = tag.get_text(strip=True)
-                data['author'] = val if plausible_author(val) else ""
-                break
-            if tag.string and 'Автор:' in tag.string:
-                found_author = True
-        if data['author']:
-            break
-    return data
+def extract_author_from_text(text):
+    match = re.search(r'Автор[:\s]*([^\n\r]+)', text, re.IGNORECASE)
+    if match:
+        candidate = match.group(1).strip()
+        candidate = re.split(r'(Источник|Дата|Заглавие|Номер выпуска|Best\.ru|Премия)', candidate)[0].strip()
+        if plausible_author(candidate):
+            return candidate
+    return ""
 
-def extract_from_fb_frame(driver):
+def extract_from_fb_frame(driver, fallback_title=None):
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     data = {'source':'','date':'','author':'','title':'','body':''}
+
     pres = soup.find_all('pre')
     if pres:
-        pre_htmls = [str(p) for p in pres]
-        return extract_from_pre(pre_htmls)
+        all_text = []
+        for pre_html in pres:
+            all_text.append(pre_html.get_text("\n"))
+        full_text = "\n".join(all_text)
+        lines = [line.strip() for line in full_text.split('\n') if line.strip()]
+        for i, line in enumerate(lines):
+            if line.startswith('Источник:'):
+                val = line.replace('Источник:', '').strip()
+                data['source'] = val if plausible_source(val) else ""
+            elif line.startswith('Дата выпуска:'):
+                val = line.replace('Дата выпуска:', '').strip()
+                data['date'] = val if val else ""
+            elif line.startswith('Заглавие:'):
+                val = line.replace('Заглавие:', '').strip()
+                data['title'] = val if plausible_title(val) else ""
+                data['body'] = '\n'.join(lines[i+1:]).strip()
+                break
+        data['author'] = extract_author_from_text(full_text)
+        if data['title'] or data['body']:
+            return data
+
     meta_font = None
     for font in soup.find_all('font'):
         if 'Источник:' in font.get_text():
@@ -89,30 +84,17 @@ def extract_from_fb_frame(driver):
         for br in meta_font.find_all("br"):
             br.replace_with("\n")
         lines = [line.strip() for line in meta_font.get_text("\n").split('\n') if line.strip()]
-        for line in lines:
+        for i, line in enumerate(lines):
             if line.startswith('Источник:'):
                 val = line.replace('Источник:', '').strip()
                 data['source'] = val if plausible_source(val) else ""
             elif line.startswith('Дата выпуска:'):
                 val = line.replace('Дата выпуска:', '').strip()
                 data['date'] = val if val else ""
-            elif line.startswith('Автор:'):
-                val = line.replace('Автор:', '').strip()
-                data['author'] = val if plausible_author(val) else ""
             elif line.startswith('Заглавие:'):
                 val = line.replace('Заглавие:', '').strip()
                 data['title'] = val if plausible_title(val) else ""
-        if not data['author']:
-            found_meta = False
-            for font in soup.find_all('font'):
-                if font == meta_font:
-                    found_meta = True
-                    continue
-                if found_meta:
-                    possible_author = font.get_text(strip=True)
-                    if plausible_author(possible_author):
-                        data['author'] = possible_author
-                        break
+        data['author'] = extract_author_from_text(meta_font.get_text("\n"))
         body_parts = []
         found_meta = False
         found_author = False
@@ -128,8 +110,11 @@ def extract_from_fb_frame(driver):
             text = tag.get_text(" ", strip=True)
             if text:
                 body_parts.append(text)
-        data['body'] = "\n".join(body_parts).strip()
-        return data
+        if body_parts:
+            data['body'] = "\n".join(body_parts).strip()
+        if data['title'] or data['body']:
+            return data
+
     tds = soup.find_all('td')
     max_text = ""
     for td in tds:
@@ -139,41 +124,50 @@ def extract_from_fb_frame(driver):
         text = BeautifulSoup(td_html, "html.parser").get_text("\n").strip()
         if len(text) > len(max_text):
             max_text = text
-    data['body'] = max_text.strip()
+    if max_text:
+        data['body'] = max_text.strip()
+        data['author'] = extract_author_from_text(max_text)
+
+    if not data['body']:
+        text = soup.get_text("\n").strip()
+        if text:
+            data['body'] = text
+            data['author'] = extract_author_from_text(text)
+
+    if not data['title'] and fallback_title:
+        data['title'] = fallback_title
+
     return data
 
 options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
+prefs = {
+    "profile.managed_default_content_settings.images": 2,
+    "profile.managed_default_content_settings.stylesheets": 2,
+    "profile.default_content_settings.cookies": 2
+}
+options.add_experimental_option("prefs", prefs)
 service = ChromeService(executable_path=CHROMEDRIVER_PATH)
 driver = webdriver.Chrome(service=service, options=options)
-wait = WebDriverWait(driver, 20)
+wait = WebDriverWait(driver, 6)
 
 try:
     driver.get(START_URL)
-    wait.until(
-        EC.element_to_be_clickable((By.XPATH,
-            "//input[@type='submit' and @value='Ich akzeptiere die Benutzungsbedingungen']"
-        ))
-    ).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH,
+        "//input[@type='submit' and @value='Ich akzeptiere die Benutzungsbedingungen']"))).click()
     wait.until(EC.presence_of_element_located((By.XPATH,
-        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[1]/td[2]/input"
-    ))).send_keys(USERNAME)
+        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[1]/td[2]/input"))).send_keys(USERNAME)
     wait.until(EC.presence_of_element_located((By.XPATH,
-        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[2]/td[2]/input"
-    ))).send_keys(PASSWORD)
+        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[2]/td[2]/input"))).send_keys(PASSWORD)
     wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[3]/td/input"
-    ))).click()
+        "/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/form/table/tbody/tr[3]/td/input"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/form/table/tbody/tr[3]/td/input"
-    ))).click()
+        "/html/body/form/table/tbody/tr[3]/td/input"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/div[1]/a"
-    ))).click()
+        "/html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/div[1]/a"))).click()
     ta = wait.until(EC.presence_of_element_located((By.XPATH,
-        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[1]/textarea"
-    )))
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[1]/textarea")))
     ta.clear()
     ta.send_keys('"Кирилл Дмитриев"')
     xpaths_to_click = [
@@ -196,18 +190,16 @@ try:
         except Exception:
             pass
     dp = wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[1]"
-    )))
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[1]")))
     dp.clear(); dp.send_keys("01.01.2010")
     search_btn = wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]"
-    )))
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]")))
     driver.execute_script("arguments[0].scrollIntoView(true);", search_btn)
     search_btn.click()
     csv_file = open('output.csv', 'w', newline='', encoding='utf-8')
-    writer = csv.DictWriter(csv_file, fieldnames=['source', 'date', 'author', 'title', 'body'])
+    writer = csv.DictWriter(csv_file, fieldnames=['source', 'date', 'author', 'title', 'body', 'url'])
     writer.writeheader()
-    time.sleep(1)
+    time.sleep(0.5)
     cat_xpath = (
         "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
         "tr/td[1]/table/tbody/tr[1]/td/table/tbody/tr[position()>1]/td[1]/a"
@@ -220,19 +212,21 @@ try:
             break
         for cat_index in range(len(categories)):
             categories = driver.find_elements(By.XPATH, cat_xpath)
+            if cat_index >= len(categories):
+                break
             cat_link = categories[cat_index]
             cat_link_text = cat_link.text.strip()
             if "pdf" in cat_link_text.lower() or "архив" in cat_link_text.lower():
-                print(f"Skipping category: {cat_link_text}")
                 continue
-            print(f"Processing category: {cat_link_text}")
             cat_link.click()
-            time.sleep(1)
-            entry_xpath = (
-                "/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[4]"
-                "/tbody/tr/td/dt/a"
-            )
+            time.sleep(0.1)
+            category_page_num = 1
+            pages_scrolled = 1
             while True:
+                entry_xpath = (
+                    "/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[4]"
+                    "/tbody/tr/td/dt/a"
+                )
                 entries = driver.find_elements(By.XPATH, entry_xpath)
                 if not entries:
                     break
@@ -240,28 +234,41 @@ try:
                     entries = driver.find_elements(By.XPATH, entry_xpath)
                     entry = entries[entry_index]
                     entry_text = entry.text
-                    print(f"  Processing article: {entry_text}")
+                    article_url = entry.get_attribute("href")
                     entry.click()
-                    time.sleep(1)
-                    wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "fb")))
-                    data = extract_from_fb_frame(driver)
-                    print("    === EXTRACTED DATA ===")
-                    print(data)
+                    time.sleep(0.05)
+                    try:
+                        wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "fb")))
+                    except TimeoutException:
+                        driver.switch_to.default_content()
+                        driver.back()
+                        continue
+                    data = extract_from_fb_frame(driver, fallback_title=entry_text)
+                    data['url'] = article_url
                     writer.writerow(data)
                     driver.switch_to.default_content()
                     driver.back()
-                    time.sleep(1)
-                break
-            driver.back()
-            time.sleep(1)
-        # --- Pagination: try to click the next page link ---
+                    time.sleep(0.05)
+                category_page_num += 1
+                next_cat_page_xpath = f"/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[5]/tbody/tr/td/table/tbody/tr/td[5]/a[{category_page_num}]"
+                short_wait = WebDriverWait(driver, 1)
+                try:
+                    next_button = short_wait.until(EC.element_to_be_clickable((By.XPATH, next_cat_page_xpath)))
+                    next_button.click()
+                    pages_scrolled += 1
+                    time.sleep(0.1)
+                except (TimeoutException, NoSuchElementException, ElementClickInterceptedException):
+                    break
+            for _ in range(pages_scrolled):
+                driver.back()
+                time.sleep(0.05)
+        # CATEGORY MENU PAGINATION: Robust handling
         try:
             next_link = wait.until(EC.element_to_be_clickable((By.XPATH, next_page_xpath)))
-            print("Clicking next page...")
             next_link.click()
-            time.sleep(2)
-        except (TimeoutException, NoSuchElementException, ElementClickInterceptedException):
-            print("No more pages or next page not clickable. Done.")
+            time.sleep(0.2)
+        except (TimeoutException, NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException) as e:
+            print(f"Category menu pagination ended or failed: {e}")
             break
 finally:
     try:
@@ -269,4 +276,3 @@ finally:
     except Exception:
         pass
     driver.quit()
-    print("Scraping complete. CSV saved as output.csv.")

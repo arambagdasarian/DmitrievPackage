@@ -16,7 +16,7 @@ START_URL = (
 )
 USERNAME = "X240451"
 PASSWORD = "AZoeypewc1#"
-CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
+CHROMEDRIVER_PATH = "./chromedriver"
 
 def plausible_author(val):
     if not val: return False
