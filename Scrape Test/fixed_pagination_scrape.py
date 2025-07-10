@@ -14,9 +14,9 @@ START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
-USERNAME = "X240392"
-PASSWORD = "sCrApE2025!"
-CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
+USERNAME = "X240451"
+PASSWORD = "AZoeypewc1#"
+CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
 
 def plausible_author(val):
     if not val: return False
@@ -139,8 +139,9 @@ def extract_from_fb_frame(driver, fallback_title=None):
 
     return data
 
+# Set up browser
 options = Options()
-# options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 prefs = {
     "profile.managed_default_content_settings.images": 2,
@@ -150,9 +151,14 @@ prefs = {
 options.add_experimental_option("prefs", prefs)
 service = ChromeService(executable_path=CHROMEDRIVER_PATH)
 driver = webdriver.Chrome(service=service, options=options)
-wait = WebDriverWait(driver, 6)
+wait = WebDriverWait(driver, 10)  # Increased timeout
+
+total_articles = 0
 
 try:
+    print("=== FIXED PAGINATION SCRAPER ===")
+    
+    # Login
     driver.get(START_URL)
     wait.until(EC.element_to_be_clickable((By.XPATH,
         "//input[@type='submit' and @value='Ich akzeptiere die Benutzungsbedingungen']"))).click()
@@ -166,10 +172,14 @@ try:
         "/html/body/form/table/tbody/tr[3]/td/input"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH,
         "/html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/div[1]/a"))).click()
+    
+    # Search setup
     ta = wait.until(EC.presence_of_element_located((By.XPATH,
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[1]/textarea")))
     ta.clear()
     ta.send_keys('"Кирилл Дмитриев"')
+    
+    # Select publication categories
     xpaths_to_click = [
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[2]/tbody/tr[2]/td[1]/input[4]",
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[2]/tbody/tr[2]/td[1]/input[8]",
@@ -189,39 +199,71 @@ try:
             el.click()
         except Exception:
             pass
+    
+    # Set date range (2010+)
     dp = wait.until(EC.element_to_be_clickable((By.XPATH,
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[1]")))
-    dp.clear(); dp.send_keys("01.01.2010")
+    dp.clear()
+    dp.send_keys("01.01.2010")
+    
+    # Execute search
     search_btn = wait.until(EC.element_to_be_clickable((By.XPATH,
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]")))
     driver.execute_script("arguments[0].scrollIntoView(true);", search_btn)
     search_btn.click()
-    csv_file = open('output.csv', 'w', newline='', encoding='utf-8')
+    
+    # Set up CSV
+    csv_file = open('fixed_output.csv', 'w', newline='', encoding='utf-8')
     writer = csv.DictWriter(csv_file, fieldnames=['source', 'date', 'author', 'title', 'body', 'url'])
     writer.writeheader()
-    time.sleep(0.5)
+    
+    time.sleep(1)
+    
+    # MAIN SCRAPING LOOP WITH FIXED PAGINATION
     cat_xpath = (
         "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
         "tr/td[1]/table/tbody/tr[1]/td/table/tbody/tr[position()>1]/td[1]/a"
     )
-
-    while True:
+    next_page_xpath = "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[3]/td/table/tbody/tr/td[2]/a[2]"
+    
+    category_page_num = 0
+    
+    while True:  # FIXED: Proper category page loop
+        category_page_num += 1
+        print(f"\n=== PROCESSING CATEGORY PAGE {category_page_num} ===")
+        
+        # Get categories on current page
         categories = driver.find_elements(By.XPATH, cat_xpath)
         if not categories:
+            print("No categories found on this page")
             break
+            
+        print(f"Found {len(categories)} categories on page {category_page_num}")
+        
+        # Process each category on this page
         for cat_index in range(len(categories)):
+            # IMPORTANT: Re-find categories each time (DOM changes)
             categories = driver.find_elements(By.XPATH, cat_xpath)
             if cat_index >= len(categories):
                 break
+                
             cat_link = categories[cat_index]
             cat_link_text = cat_link.text.strip()
+            
+            # Skip PDFs and archives (as in original script)
             if "pdf" in cat_link_text.lower() or "архив" in cat_link_text.lower():
                 continue
+                
+            print(f"  Processing category: {cat_link_text}")
             cat_link.click()
-            time.sleep(0.1)
-            category_page_num = 1
-            pages_scrolled = 1
-            while True:
+            time.sleep(0.2)
+            
+            # Process articles within this category
+            articles_in_category = 0
+            within_category_page = 1
+            pages_navigated = 1
+            
+            while True:  # Within-category pagination
                 entry_xpath = (
                     "/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[4]"
                     "/tbody/tr/td/dt/a"
@@ -229,64 +271,76 @@ try:
                 entries = driver.find_elements(By.XPATH, entry_xpath)
                 if not entries:
                     break
+                
                 for entry_index in range(len(entries)):
                     entries = driver.find_elements(By.XPATH, entry_xpath)
+                    if entry_index >= len(entries):
+                        break
+                        
                     entry = entries[entry_index]
                     entry_text = entry.text
                     article_url = entry.get_attribute("href")
                     entry.click()
-                    time.sleep(0.05)
+                    time.sleep(0.1)
+                    
                     try:
                         wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "fb")))
                     except TimeoutException:
                         driver.switch_to.default_content()
                         driver.back()
                         continue
+                    
                     data = extract_from_fb_frame(driver, fallback_title=entry_text)
                     data['url'] = article_url
                     writer.writerow(data)
+                    articles_in_category += 1
+                    total_articles += 1
+                    
+                    if total_articles % 100 == 0:
+                        print(f"    Total articles collected: {total_articles}")
+                    
                     driver.switch_to.default_content()
                     driver.back()
-                    time.sleep(0.05)
-                category_page_num += 1
-                next_cat_page_xpath = f"/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[5]/tbody/tr/td/table/tbody/tr/td[5]/a[{category_page_num}]"
-                short_wait = WebDriverWait(driver, 1)
-                try:
-                    next_button = short_wait.until(EC.element_to_be_clickable((By.XPATH, next_cat_page_xpath)))
-                    next_button.click()
-                    pages_scrolled += 1
                     time.sleep(0.1)
-                except (TimeoutException, NoSuchElementException, ElementClickInterceptedException):
+                
+                # Try next page within category
+                within_category_page += 1
+                next_cat_page_xpath = f"/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[5]/tbody/tr/td/table/tbody/tr/td[5]/a[{within_category_page}]"
+                try:
+                    next_button = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, next_cat_page_xpath)))
+                    next_button.click()
+                    pages_navigated += 1
+                    time.sleep(0.2)
+                except:
                     break
-            for _ in range(pages_scrolled):
+            
+            print(f"    Category complete: {articles_in_category} articles")
+            
+            # Navigate back to category list
+            for _ in range(pages_navigated):
                 driver.back()
-                time.sleep(0.05)
-
-        # --- CATEGORY MENU PAGINATION: MANUAL, ROBUST ---
-        pag_xpath = "//tr[td[contains(@class,'maintxt')]]/td[contains(@class,'txt')]"
+                time.sleep(0.1)
+        
+        # FIXED: Navigate to next category page
+        print(f"=== Trying to go to category page {category_page_num + 1} ===")
         try:
-            pag_cells = driver.find_elements(By.XPATH, pag_xpath)
-            next_link = None
-            for cell in pag_cells:
-                for a in cell.find_elements(By.TAG_NAME, "a"):
-                    if a.text.strip() == ">>":
-                        next_link = a
-                        break
-                if next_link:
-                    break
-            if next_link:
-                driver.execute_script("arguments[0].scrollIntoView(true);", next_link)
-                next_link.click()
-                time.sleep(0.5)
-            else:
-                break  # No more next page, stop looping
+            next_link = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, next_page_xpath)))
+            next_link.click()
+            time.sleep(1)
+            print(f"Successfully moved to category page {category_page_num + 1}")
         except Exception as e:
-            print(f"Category menu pagination failed: {e}")
+            print(f"No more category pages. Final page was {category_page_num}")
+            print(f"Reason: {type(e).__name__}")
             break
 
 finally:
     try:
         csv_file.close()
-    except Exception:
+    except:
         pass
     driver.quit()
+    
+    print(f"\n=== SCRAPING COMPLETE ===")
+    print(f"Total articles collected: {total_articles}")
+    print(f"Category pages processed: {category_page_num}")
+    print(f"Data saved to: fixed_output.csv") 

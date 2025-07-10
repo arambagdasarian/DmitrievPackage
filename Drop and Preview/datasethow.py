@@ -1,10 +1,15 @@
-import csv
-import sys
+import pandas as pd
 
-csv.field_size_limit(sys.maxsize)
+# Load the CSV file
+df = pd.read_csv('ner_analysis.csv')
 
-with open('output.csv', 'r', encoding='utf-8') as file:
-    reader = csv.reader(file)
-    row_count = sum(1 for _ in reader)
+# Pick 10 random rows
+sampled_df = df.sample(10)
 
-print(f"Total number of rows (including header): {row_count}")
+# Set display options for better readability
+pd.set_option('display.max_columns', None)         # Show all columns
+pd.set_option('display.width', 120)                # Set terminal display width
+pd.set_option('display.max_colwidth', 30)          # Limit column width (truncate long text)
+
+# Print the sample
+print(sampled_df)

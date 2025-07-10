@@ -14,9 +14,10 @@ START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
-USERNAME = "X240392"
-PASSWORD = "sCrApE2025!"
+USERNAME = "X240451"
+PASSWORD = "AZoeypewc1#"
 CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
+
 
 def plausible_author(val):
     if not val: return False
@@ -204,6 +205,7 @@ try:
         "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
         "tr/td[1]/table/tbody/tr[1]/td/table/tbody/tr[position()>1]/td[1]/a"
     )
+    next_page_xpath = "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[3]/td/table/tbody/tr/td[2]/a[2]"
 
     while True:
         categories = driver.find_elements(By.XPATH, cat_xpath)
@@ -261,29 +263,14 @@ try:
             for _ in range(pages_scrolled):
                 driver.back()
                 time.sleep(0.05)
-
-        # --- CATEGORY MENU PAGINATION: MANUAL, ROBUST ---
-        pag_xpath = "//tr[td[contains(@class,'maintxt')]]/td[contains(@class,'txt')]"
+        # CATEGORY MENU PAGINATION: Robust handling
         try:
-            pag_cells = driver.find_elements(By.XPATH, pag_xpath)
-            next_link = None
-            for cell in pag_cells:
-                for a in cell.find_elements(By.TAG_NAME, "a"):
-                    if a.text.strip() == ">>":
-                        next_link = a
-                        break
-                if next_link:
-                    break
-            if next_link:
-                driver.execute_script("arguments[0].scrollIntoView(true);", next_link)
-                next_link.click()
-                time.sleep(0.5)
-            else:
-                break  # No more next page, stop looping
-        except Exception as e:
-            print(f"Category menu pagination failed: {e}")
+            next_link = wait.until(EC.element_to_be_clickable((By.XPATH, next_page_xpath)))
+            next_link.click()
+            time.sleep(0.2)
+        except (TimeoutException, NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException) as e:
+            print(f"Category menu pagination ended or failed: {e}")
             break
-
 finally:
     try:
         csv_file.close()

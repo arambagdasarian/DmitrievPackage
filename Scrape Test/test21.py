@@ -16,7 +16,8 @@ START_URL = (
 )
 USERNAME = "X240451"
 PASSWORD = "AZoeypewc1#"
-CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
+CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
+
 
 def plausible_author(val):
     if not val: return False
@@ -140,7 +141,7 @@ def extract_from_fb_frame(driver, fallback_title=None):
     return data
 
 options = Options()
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 prefs = {
     "profile.managed_default_content_settings.images": 2,

@@ -1,3 +1,4 @@
+import os
 import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,13 +11,18 @@ import csv
 import time
 from bs4 import BeautifulSoup
 
+# Create folder for downloaded documents
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "scraped docs")
+os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+
+# Your original configuration
 START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
 USERNAME = "X240451"
 PASSWORD = "AZoeypewc1#"
-CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
+CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
 
 def plausible_author(val):
     if not val: return False
@@ -139,13 +145,18 @@ def extract_from_fb_frame(driver, fallback_title=None):
 
     return data
 
+# Configure Chrome for downloads
 options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 prefs = {
     "profile.managed_default_content_settings.images": 2,
     "profile.managed_default_content_settings.stylesheets": 2,
-    "profile.default_content_settings.cookies": 2
+    "profile.default_content_settings.cookies": 2,
+    "download.default_directory": DOWNLOAD_DIR,
+    "download.prompt_for_download": False,
+    "download.directory_upgrade": True,
+    "safebrowsing.enabled": True
 }
 options.add_experimental_option("prefs", prefs)
 service = ChromeService(executable_path=CHROMEDRIVER_PATH)
@@ -153,6 +164,7 @@ driver = webdriver.Chrome(service=service, options=options)
 wait = WebDriverWait(driver, 6)
 
 try:
+    # Your original login and search flow
     driver.get(START_URL)
     wait.until(EC.element_to_be_clickable((By.XPATH,
         "//input[@type='submit' and @value='Ich akzeptiere die Benutzungsbedingungen']"))).click()
@@ -196,83 +208,47 @@ try:
         "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]")))
     driver.execute_script("arguments[0].scrollIntoView(true);", search_btn)
     search_btn.click()
-    csv_file = open('output.csv', 'w', newline='', encoding='utf-8')
-    writer = csv.DictWriter(csv_file, fieldnames=['source', 'date', 'author', 'title', 'body', 'url'])
-    writer.writeheader()
-    time.sleep(0.5)
-    cat_xpath = (
-        "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
-        "tr/td[1]/table/tbody/tr[1]/td/table/tbody/tr[position()>1]/td[1]/a"
-    )
-    next_page_xpath = "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[3]/td/table/tbody/tr/td[2]/a[2]"
 
+    # Wait for search results and click the new XPath link
+    time.sleep(2)
+    next_link = wait.until(EC.element_to_be_clickable((By.XPATH,
+        "/html/body/table/tbody/tr[4]/td/table/tbody/tr/td[1]/table/tbody/tr/td[3]/a"
+    )))
+    next_link.click()
+
+    # Now handle the checkbox and download flow
     while True:
-        categories = driver.find_elements(By.XPATH, cat_xpath)
-        if not categories:
-            break
-        for cat_index in range(len(categories)):
-            categories = driver.find_elements(By.XPATH, cat_xpath)
-            if cat_index >= len(categories):
-                break
-            cat_link = categories[cat_index]
-            cat_link_text = cat_link.text.strip()
-            if "pdf" in cat_link_text.lower() or "архив" in cat_link_text.lower():
-                continue
-            cat_link.click()
-            time.sleep(0.1)
-            category_page_num = 1
-            pages_scrolled = 1
-            while True:
-                entry_xpath = (
-                    "/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[4]"
-                    "/tbody/tr/td/dt/a"
-                )
-                entries = driver.find_elements(By.XPATH, entry_xpath)
-                if not entries:
-                    break
-                for entry_index in range(len(entries)):
-                    entries = driver.find_elements(By.XPATH, entry_xpath)
-                    entry = entries[entry_index]
-                    entry_text = entry.text
-                    article_url = entry.get_attribute("href")
-                    entry.click()
-                    time.sleep(0.05)
-                    try:
-                        wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "fb")))
-                    except TimeoutException:
-                        driver.switch_to.default_content()
-                        driver.back()
-                        continue
-                    data = extract_from_fb_frame(driver, fallback_title=entry_text)
-                    data['url'] = article_url
-                    writer.writerow(data)
-                    driver.switch_to.default_content()
-                    driver.back()
-                    time.sleep(0.05)
-                category_page_num += 1
-                next_cat_page_xpath = f"/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[5]/tbody/tr/td/table/tbody/tr/td[5]/a[{category_page_num}]"
-                short_wait = WebDriverWait(driver, 1)
-                try:
-                    next_button = short_wait.until(EC.element_to_be_clickable((By.XPATH, next_cat_page_xpath)))
-                    next_button.click()
-                    pages_scrolled += 1
-                    time.sleep(0.1)
-                except (TimeoutException, NoSuchElementException, ElementClickInterceptedException):
-                    break
-            for _ in range(pages_scrolled):
-                driver.back()
-                time.sleep(0.05)
-        # CATEGORY MENU PAGINATION: Robust handling
+        # Select all checkboxes with name="doc"
+        checkboxes = driver.find_elements(By.CSS_SELECTOR, "input[type='checkbox'][name='doc']")
+        for cb in checkboxes:
+            try:
+                cb.click()
+            except Exception:
+                pass
+
+        # Find and click the "Open with MS Word" button
         try:
-            next_link = wait.until(EC.element_to_be_clickable((By.XPATH, next_page_xpath)))
-            next_link.click()
-            time.sleep(0.2)
-        except (TimeoutException, NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException) as e:
-            print(f"Category menu pagination ended or failed: {e}")
+            word_btn = wait.until(EC.element_to_be_clickable((By.XPATH,
+                "//td/input[@type='submit'][@value='Open with MS Word  (0.00 rub.)']"
+            )))
+            word_btn.click()
+            time.sleep(2)  # Allow download to initiate
+        except Exception as e:
+            print(f"Could not click word button: {e}")
+
+        # Find next page link and click if exists, else break
+        try:
+            next_page = wait.until(EC.element_to_be_clickable((By.XPATH,
+                "//a[contains(@href, 'ia5.aspx?lv=') and contains(text(), '>>')]"
+            )))
+            next_page.click()
+            time.sleep(2)
+        except (TimeoutException, NoSuchElementException):
+            print("No more pages, ending.")
             break
+
 finally:
     try:
-        csv_file.close()
+        driver.quit()
     except Exception:
         pass
-    driver.quit()

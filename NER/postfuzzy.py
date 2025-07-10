@@ -34,7 +34,6 @@ def canonicalize_entity(entity):
         r'^владимир путин$',
         r'^владимира путина$',
         r'^путин$',
-        r'^путина$',
         r'^в путин$',
         r'^владимир владимирович путин$'
     ]
@@ -47,7 +46,6 @@ def canonicalize_entity(entity):
     dmitriev_patterns = [
         r'^кирилл дмитриев$',
         r'^кирилла дмитриева$',
-        r'^дмитриева$',
         r'^к дмитриев$',
         r'^кирилл александрович дмитриев$'
     ]
@@ -61,7 +59,6 @@ def canonicalize_entity(entity):
         r'^дональд трамп$',
         r'^дональда трампа$',
         r'^трамп$',
-        r'^трампа$',
         r'^д трамп$',
         r'^donald trump$'
     ]
@@ -70,15 +67,10 @@ def canonicalize_entity(entity):
         if re.match(pattern, entity_norm):
             return 'Дональд Трамп'
     
-    # News agencies canonicalization
+    # Add more entity canonicalizations as needed
+    # Example: News agencies
     if entity_norm in ['тасс', 'итар-тасс']:
         return 'ТАСС'
-    
-    if entity_norm in ['прайм', 'prime']:
-        return 'ПРАЙМ'
-    
-    if entity_norm in ['смиа', 'сми']:
-        return 'СМИ'
     
     # Return original entity if no canonicalization needed
     return entity_clean
@@ -97,67 +89,19 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
     print("\nCanonicalizing entity names...")
     df['Entity_canonical'] = df['Entity'].apply(canonicalize_entity)
     
-    # 2. EXPANDED BLACKLIST - Remove generic/non-analytical entities
+    # 2. Define blacklist for generic/geopolitical entities to remove
     BLACKLIST = {
-        # Countries and major geopolitical entities
         'россия', 'россии', 'россию', 'россией', 'российская федерация', 'рф',
         'украина', 'украины', 'украину', 'украиной', 'украине',
         'москва', 'москве', 'москвы', 'москву', 'москвой',
-        'китай', 'китае', 'китая', 'китаю', 'китаем', 'кнр',
+        'китай', 'китае', 'китая', 'китаю', 'китаем',
         'сша', 'америка', 'американский', 'американская', 'американские',
         'европа', 'евросоюз', 'европейский', 'европейская', 'европейские',
-        'саудовская аравия', 'саудовской аравии', 'саудовскую аравию',
-        
-        # Government institutions and generic terms
         'правительство', 'правительства', 'правительству', 'правительством',
         'президент', 'президента', 'президенту', 'президентом',
         'министерство', 'министерства', 'министерству', 'министерством',
-        'минздрав', 'мид', 'минфин', 'минэкономразвития',
         'кремль', 'кремля', 'кремлю', 'кремлем',
-        'вашингтон', 'вашингтона', 'вашингтону', 'вашингтоном',
-        'госдума', 'совет федерации', 'парламент',
-        
-        # News agencies and media
-        'тасс', 'итар-тасс', 'прайм', 'сми', 'смиа',
-        'риа новости', 'рбк', 'коммерсантъ', 'ведомости',
-        'интерфакс', 'россия сегодня', 'rt', 'russia today',
-        'bbc', 'cnn', 'reuters', 'bloomberg', 'ap', 'afp',
-        'dw', 'france24', 'euronews',
-        
-        # Generic organizational terms
-        'агентство', 'служба', 'комитет', 'департамент',
-        'управление', 'администрация', 'ведомство',
-        'корпорация', 'холдинг', 'группа компаний',
-        
-        # Generic locations
-        'центр', 'регион', 'область', 'край', 'республика',
-        'город', 'район', 'улица', 'площадь',
-        
-        # Generic financial/economic terms
-        'банк', 'банка', 'банку', 'банком',
-        'биржа', 'биржи', 'бирже', 'биржей',
-        'рынок', 'рынка', 'рынку', 'рынком',
-        'экономика', 'экономики', 'экономике', 'экономикой',
-        
-        # Generic titles and positions
-        'директор', 'директора', 'директору', 'директором',
-        'руководитель', 'руководителя', 'руководителю', 'руководителем',
-        'председатель', 'председателя', 'председателю', 'председателем',
-        'заместитель', 'заместителя', 'заместителю', 'заместителем',
-        'министр', 'министра', 'министру', 'министром',
-        'губернатор', 'губернатора', 'губернатору', 'губернатором',
-        'мэр', 'мэра', 'мэру', 'мэром',
-        
-        # Generic company/organization suffixes
-        'ооо', 'зао', 'оао', 'ао', 'пао', 'нко',
-        'ltd', 'llc', 'inc', 'corp', 'gmbh',
-        
-        # Other generic terms
-        'компания', 'компании', 'компанию', 'компанией',
-        'организация', 'организации', 'организацию', 'организацией',
-        'учреждение', 'учреждения', 'учреждению', 'учреждением',
-        'фирма', 'фирмы', 'фирму', 'фирмой',
-        'предприятие', 'предприятия', 'предприятию', 'предприятием'
+        'вашингтон', 'вашингтона', 'вашингтону', 'вашингтоном'
     }
     
     # 3. Remove blacklisted entities
@@ -194,17 +138,18 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
     
     print(f"After merge columns: {df_final.columns.tolist()}")
     
-    # 8. Handle column renaming properly
+    # 8. CRITICAL FIX: Handle column renaming properly
+    # First drop the old 'Occurrences' column to avoid duplication
     if 'Occurrences' in df_final.columns:
         df_final = df_final.drop(columns=['Occurrences'])
         print("Dropped original 'Occurrences' column to avoid duplication")
     
-    # 9. Drop old 'Entity' column BEFORE renaming 'Entity_canonical'
+    # 9. FIXED: Drop old 'Entity' column BEFORE renaming 'Entity_canonical'
     if 'Entity' in df_final.columns:
         df_final = df_final.drop(columns=['Entity'])
         print("Dropped original 'Entity' column")
     
-    # 10. Rename columns
+    # 10. Rename 'Entity_canonical' to 'Entity' and 'New_Occurrences' to 'Occurrences'
     df_final = df_final.rename(columns={
         'Entity_canonical': 'Entity',
         'New_Occurrences': 'Occurrences'
@@ -214,7 +159,7 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
     available_columns = df_final.columns.tolist()
     print(f"Available columns before reordering: {available_columns}")
     
-    # 12. Reorder columns
+    # 12. Reorder columns - only use columns that actually exist
     desired_columns = ['Article_ID', 'Date', 'Source', 'Entity', 'Entity_Type', 'Occurrences', 'Context_Text']
     columns_order = [col for col in desired_columns if col in available_columns]
     
@@ -230,10 +175,12 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
     if len(df_final.columns) != len(set(df_final.columns)):
         print("WARNING: Duplicate column names detected!")
         print(f"Columns: {df_final.columns.tolist()}")
+        # Remove duplicates by keeping only the first occurrence
         df_final = df_final.loc[:, ~df_final.columns.duplicated()]
         print(f"After removing duplicates: {df_final.columns.tolist()}")
     
-    # 14. Sort by occurrences and entity name
+    # 14. Sort by occurrences (descending) and then by entity name
+    # Only sort if both columns exist
     if 'Occurrences' in df_final.columns and 'Entity' in df_final.columns:
         df_final = df_final.sort_values(['Occurrences', 'Entity'], ascending=[False, True])
         print("Sorted by Occurrences and Entity")
@@ -258,18 +205,10 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
     print(df_final['Entity_Type'].value_counts())
     
     if 'Occurrences' in df_final.columns:
-        print(f"\nTop 20 most frequent entities:")
-        top_entities = df_final.groupby('Entity')['Occurrences'].first().sort_values(ascending=False).head(20)
+        print(f"\nTop 15 most frequent entities:")
+        top_entities = df_final.groupby('Entity')['Occurrences'].first().sort_values(ascending=False).head(15)
         for entity, count in top_entities.items():
             print(f"{entity}: {count:,}")
-    
-    # 17. Show what was removed
-    print(f"\n=== BLACKLISTED ENTITIES REMOVED ===")
-    print("Examples of removed entity types:")
-    print("- News agencies: ТАСС, ПРАЙМ, СМИ")
-    print("- Government institutions: Минздрав, МИД")
-    print("- Generic locations: Countries, cities")
-    print("- Generic organizational terms")
     
     print(f"\nFinal dataset saved to: {output_file}")
     return df_final
@@ -278,7 +217,7 @@ def clean_and_normalize_ner_dataset(input_file, output_file, min_occurrences=5):
 if __name__ == "__main__":
     cleaned_df = clean_and_normalize_ner_dataset(
         input_file='ner_entity_dataset_cleaned.csv',
-        output_file='ner_entity_dataset_final_refined.csv',
+        output_file='ner_entity_dataset_final.csv',
         min_occurrences=5
     )
     
@@ -286,11 +225,9 @@ if __name__ == "__main__":
     print("Checking for RDIF variants in final dataset:")
     if len(cleaned_df) > 0:
         rdif_variants = cleaned_df[cleaned_df['Entity'].str.contains('РФПИ|фонд|RDIF', case=False, na=False)]['Entity'].unique()
-        print(f"Found {len(rdif_variants)} fund-related entities")
-        
-        # Show top 10 fund entities
-        fund_entities = cleaned_df[cleaned_df['Entity'].str.contains('РФПИ|фонд|RDIF', case=False, na=False)]
-        top_funds = fund_entities.groupby('Entity')['Occurrences'].first().sort_values(ascending=False).head(10)
-        print("\nTop 10 fund-related entities:")
-        for entity, count in top_funds.items():
-            print(f"  {entity}: {count:,} occurrences")
+        for variant in rdif_variants:
+            if 'Occurrences' in cleaned_df.columns:
+                count = cleaned_df[cleaned_df['Entity'] == variant]['Occurrences'].iloc[0] if len(cleaned_df[cleaned_df['Entity'] == variant]) > 0 else 0
+                print(f"  {variant}: {count:,} occurrences")
+            else:
+                print(f"  {variant}: found in dataset")

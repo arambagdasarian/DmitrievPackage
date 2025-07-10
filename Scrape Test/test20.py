@@ -14,9 +14,10 @@ START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
-USERNAME = "X240451"
-PASSWORD = "AZoeypewc1#"
-CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
+USERNAME = "X240392"
+PASSWORD = "sCrApE2025!"
+
+CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
 CATEGORY_MENU_NEXT_XPATH = "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[3]/td/table/tbody/tr/td[2]/a[2]"
 CAT_XPATH = (
     "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
@@ -149,7 +150,7 @@ def extract_from_fb_frame(driver, fallback_title=None):
 
 def create_driver():
     options = Options()
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     prefs = {
         "profile.managed_default_content_settings.images": 2,

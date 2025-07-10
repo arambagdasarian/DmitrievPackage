@@ -1,3 +1,4 @@
+import os
 import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,12 +11,13 @@ import csv
 import time
 from bs4 import BeautifulSoup
 
+# Base configuration
 START_URL = (
     "https://dbis.uni-regensburg.de/warpto?ubr_id=SBBPK&resource_id=9032"
     "&license_type=3&license_form=31&access_type=1&access_form=&access_id=32045"
 )
-USERNAME = "X240392"
-PASSWORD = "sCrApE2025!"
+USERNAME = "X240451"
+PASSWORD = "AZoeypewc1#"
 CHROMEDRIVER_PATH = "/Users/aranbagdasarian/Documents/GitHub/ScrapeTestSNA/chromedriver"
 
 def plausible_author(val):
@@ -139,20 +141,7 @@ def extract_from_fb_frame(driver, fallback_title=None):
 
     return data
 
-options = Options()
-# options.add_argument("--headless")
-options.add_argument("--disable-gpu")
-prefs = {
-    "profile.managed_default_content_settings.images": 2,
-    "profile.managed_default_content_settings.stylesheets": 2,
-    "profile.default_content_settings.cookies": 2
-}
-options.add_experimental_option("prefs", prefs)
-service = ChromeService(executable_path=CHROMEDRIVER_PATH)
-driver = webdriver.Chrome(service=service, options=options)
-wait = WebDriverWait(driver, 6)
-
-try:
+def perform_login_and_search(driver, wait, from_date, to_date, download_dir):
     driver.get(START_URL)
     wait.until(EC.element_to_be_clickable((By.XPATH,
         "//input[@type='submit' and @value='Ich akzeptiere die Benutzungsbedingungen']"))).click()
@@ -189,104 +178,110 @@ try:
             el.click()
         except Exception:
             pass
-    dp = wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[1]")))
-    dp.clear(); dp.send_keys("01.01.2010")
+    # Set date range
+    from_date_input = wait.until(EC.element_to_be_clickable((By.XPATH,
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[1]"
+    )))
+    from_date_input.clear()
+    from_date_input.send_keys(from_date)
+    to_date_input = wait.until(EC.element_to_be_clickable((By.XPATH,
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/span[1]/input[2]"
+    )))
+    to_date_input.clear()
+    to_date_input.send_keys(to_date)
     search_btn = wait.until(EC.element_to_be_clickable((By.XPATH,
-        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]")))
+        "/html/body/table[1]/tbody/tr[3]/td/table/tbody/tr[2]/td/form/table[1]/tbody/tr/td[3]//tr/td[2]"
+    )))
     driver.execute_script("arguments[0].scrollIntoView(true);", search_btn)
     search_btn.click()
-    csv_file = open('output.csv', 'w', newline='', encoding='utf-8')
-    writer = csv.DictWriter(csv_file, fieldnames=['source', 'date', 'author', 'title', 'body', 'url'])
-    writer.writeheader()
-    time.sleep(0.5)
-    cat_xpath = (
-        "/html/body/table/tbody/tr[5]/td/table[2]/tbody/tr[2]/td/table/tbody/"
-        "tr/td[1]/table/tbody/tr[1]/td/table/tbody/tr[position()>1]/td[1]/a"
-    )
 
-    while True:
-        categories = driver.find_elements(By.XPATH, cat_xpath)
-        if not categories:
-            break
-        for cat_index in range(len(categories)):
-            categories = driver.find_elements(By.XPATH, cat_xpath)
-            if cat_index >= len(categories):
-                break
-            cat_link = categories[cat_index]
-            cat_link_text = cat_link.text.strip()
-            if "pdf" in cat_link_text.lower() or "архив" in cat_link_text.lower():
-                continue
-            cat_link.click()
-            time.sleep(0.1)
-            category_page_num = 1
-            pages_scrolled = 1
-            while True:
-                entry_xpath = (
-                    "/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[4]"
-                    "/tbody/tr/td/dt/a"
-                )
-                entries = driver.find_elements(By.XPATH, entry_xpath)
-                if not entries:
-                    break
-                for entry_index in range(len(entries)):
-                    entries = driver.find_elements(By.XPATH, entry_xpath)
-                    entry = entries[entry_index]
-                    entry_text = entry.text
-                    article_url = entry.get_attribute("href")
-                    entry.click()
-                    time.sleep(0.05)
-                    try:
-                        wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "fb")))
-                    except TimeoutException:
-                        driver.switch_to.default_content()
-                        driver.back()
-                        continue
-                    data = extract_from_fb_frame(driver, fallback_title=entry_text)
-                    data['url'] = article_url
-                    writer.writerow(data)
-                    driver.switch_to.default_content()
-                    driver.back()
-                    time.sleep(0.05)
-                category_page_num += 1
-                next_cat_page_xpath = f"/html/body/table/tbody/tr[5]/td/table/tbody/tr/td/form/table[5]/tbody/tr/td/table/tbody/tr/td[5]/a[{category_page_num}]"
-                short_wait = WebDriverWait(driver, 1)
-                try:
-                    next_button = short_wait.until(EC.element_to_be_clickable((By.XPATH, next_cat_page_xpath)))
-                    next_button.click()
-                    pages_scrolled += 1
-                    time.sleep(0.1)
-                except (TimeoutException, NoSuchElementException, ElementClickInterceptedException):
-                    break
-            for _ in range(pages_scrolled):
-                driver.back()
-                time.sleep(0.05)
-
-        # --- CATEGORY MENU PAGINATION: MANUAL, ROBUST ---
-        pag_xpath = "//tr[td[contains(@class,'maintxt')]]/td[contains(@class,'txt')]"
-        try:
-            pag_cells = driver.find_elements(By.XPATH, pag_xpath)
-            next_link = None
-            for cell in pag_cells:
-                for a in cell.find_elements(By.TAG_NAME, "a"):
-                    if a.text.strip() == ">>":
-                        next_link = a
-                        break
-                if next_link:
-                    break
-            if next_link:
-                driver.execute_script("arguments[0].scrollIntoView(true);", next_link)
-                next_link.click()
-                time.sleep(0.5)
-            else:
-                break  # No more next page, stop looping
-        except Exception as e:
-            print(f"Category menu pagination failed: {e}")
-            break
-
-finally:
+def scrape_and_download(driver, wait, download_dir):
+    # Wait for search results and click the new XPath link
+    time.sleep(2)
     try:
-        csv_file.close()
-    except Exception:
-        pass
-    driver.quit()
+        next_link = wait.until(EC.element_to_be_clickable((By.XPATH,
+            "/html/body/table/tbody/tr[4]/td/table/tbody/tr/td[1]/table/tbody/tr/td[3]/a"
+        )))
+        next_link.click()
+    except Exception as e:
+        print(f"Could not click next link: {e}")
+        return
+
+    # Sort by date (using your new XPath)
+    time.sleep(2)
+    try:
+        sort_date = wait.until(EC.element_to_be_clickable((By.XPATH,
+            "/html/body/table[2]/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr/td[8]/a"
+        )))
+        driver.execute_script("arguments[0].scrollIntoView(true);", sort_date)
+        sort_date.click()
+    except Exception as e:
+        print(f"Could not click sort by date: {e}")
+        return
+
+    # Now handle the checkbox and download flow
+    while True:
+        # Select all checkboxes with name="doc"
+        checkboxes = driver.find_elements(By.CSS_SELECTOR, "input[type='checkbox'][name='doc']")
+        for cb in checkboxes:
+            try:
+                cb.click()
+            except Exception:
+                pass
+
+        # Find and click the "Open with MS Word" button
+        try:
+            word_btn = wait.until(EC.element_to_be_clickable((By.XPATH,
+                "//td/input[@type='submit'][@value='Open with MS Word  (0.00 rub.)']"
+            )))
+            driver.execute_script("arguments[0].scrollIntoView(true);", word_btn)
+            word_btn.click()
+            time.sleep(2)  # Allow download to initiate
+        except Exception as e:
+            print(f"Could not click word button: {e}")
+
+        # Find next page link and click if exists, else break
+        try:
+            next_page = wait.until(EC.element_to_be_clickable((By.XPATH,
+                "//a[contains(@href, 'ia5.aspx?lv=') and contains(text(), '>>')]"
+            )))
+            driver.execute_script("arguments[0].scrollIntoView(true);", next_page)
+            next_page.click()
+            time.sleep(2)
+        except (TimeoutException, NoSuchElementException):
+            print("No more pages, ending.")
+            break
+
+# Main loop: from 2025 back to 2010
+for year in range(2025, 2010, -1):
+    from_date = f"01.01.{year-1}"
+    to_date = f"01.01.{year}"
+    download_dir = os.path.join(os.getcwd(), "scraped docs", str(year))
+    os.makedirs(download_dir, exist_ok=True)
+
+    # Configure Chrome for downloads for this year
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    prefs = {
+        "profile.managed_default_content_settings.images": 2,
+        "profile.managed_default_content_settings.stylesheets": 2,
+        "profile.default_content_settings.cookies": 2,
+        "download.default_directory": download_dir,
+        "download.prompt_for_download": False,
+        "download.directory_upgrade": True,
+        "safebrowsing.enabled": True
+    }
+    options.add_experimental_option("prefs", prefs)
+    service = ChromeService(executable_path=CHROMEDRIVER_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
+    wait = WebDriverWait(driver, 10)
+
+    print(f"Processing {from_date} to {to_date}")
+    try:
+        perform_login_and_search(driver, wait, from_date, to_date, download_dir)
+        scrape_and_download(driver, wait, download_dir)
+    except Exception as e:
+        print(f"Error processing {from_date} to {to_date}: {e}")
+    finally:
+        driver.quit()
