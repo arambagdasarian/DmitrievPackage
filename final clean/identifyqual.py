@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import datetime
 
-# Corrected entity mapping dictionary - keeping Russian as primary
+# Entity mapping dictionary
 entity_mapping = {
     # George Nader
     'George Nader': 'Джордж Надер',
@@ -56,7 +56,7 @@ entity_mapping = {
     'Prince Bandar bin Sultan': 'принц Бандар бен Султан',
     'принц Бандар бен Султан': 'принц Бандар бен Султан',
     'принца Бандара бен Султана': 'принц Бандар бен Султан',
-    'принцу Бандару бен Султану': 'принц Бандар бен Султан',
+    'принцу Бандару бен Sultan': 'принц Бандар бен Султан',
     
     # Rick Gerson
     'Rick Gerson': 'Рик Герсон',
@@ -230,7 +230,6 @@ entity_mapping = {
     'Дингу Хуонгу': 'Динг Хуонг',
     
     # Bader Mohammad Al-Sa'ad
-    "Bader Mohammad Al-Sa'ad": 'Бадер Мохаммад Аль-Саад',
     "Bader Mohammad Al-Sa'ad": 'Бадер Мохаммад Аль-Саад',
     'Бадер Мохаммад Аль-Саад': 'Бадер Мохаммад Аль-Саад',
     'Бадера Мохаммада Аль-Саада': 'Бадер Мохаммад Аль-Саад',
@@ -700,116 +699,130 @@ entity_mapping = {
     'мост через Амур': 'Первый железнодорожный мост между Россией и Китаем',
 }
 
-def fix_and_rename_entities(csv_file_path):
-    """
-    Fix the dataset and rename entities properly, creating a deduplicated unidentified entities list.
-    """
-    # Read the CSV file
-    try:
-        df = pd.read_csv(csv_file_path)
-    except FileNotFoundError:
-        print(f"Error: File '{csv_file_path}' not found.")
-        return None
-    
-    print(f"Processing {len(df)} rows...")
-    print(f"Original unique entities: {len(df['Entity'].unique())}")
-    
-    # Track statistics
-    renamed_count = 0
-    original_unique_count = len(df['Entity'].unique())
-    
-    # Apply entity mapping
-    df['Entity'] = df['Entity'].map(entity_mapping).fillna(df['Entity'])
-    
-    # Count how many were actually renamed
-    renamed_count = len(df) - (df['Entity'] == df['Entity']).sum()
-    
-    # Get unidentified entities (those not in the mapping)
-    all_entities_in_data = set(df['Entity'].unique())
-    expected_entities = set(entity_mapping.values())  # Target entities
-    unidentified_entities = all_entities_in_data - expected_entities
-    
-    # Remove entities that were successfully mapped
-    mapped_source_entities = set(entity_mapping.keys())
-    entities_found_in_data = set()
-    
-    # Check which entities from our mapping were actually found
-    for entity in df['Entity'].unique():
-        if entity in entity_mapping:
-            entities_found_in_data.add(entity)
-    
-    # Save the corrected dataset
-    try:
-        df.to_csv(csv_file_path, index=False)
-        print(f"✓ Corrected dataset saved to '{csv_file_path}'")
-    except Exception as e:
-        print(f"Error saving file: {e}")
-        return None
-    
-    # Create deduplicated unidentified entities list
-    if unidentified_entities:
-        unidentified_df = pd.DataFrame({
-            'Unidentified_Entity': sorted(list(unidentified_entities)),
-            'Frequency': [len(df[df['Entity'] == entity]) for entity in sorted(list(unidentified_entities))]
-        })
-        unidentified_df['Timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        unidentified_df = unidentified_df.sort_values('Frequency', ascending=False)
-        
-        unidentified_file = 'unidentified_entities_deduplicated.csv'
-        try:
-            unidentified_df.to_csv(unidentified_file, index=False)
-            print(f"✓ Deduplicated unidentified entities saved to '{unidentified_file}'")
-        except Exception as e:
-            print(f"Error saving unidentified entities file: {e}")
-    
-    # Print detailed results
-    print(f"\n{'='*60}")
-    print(f"CORRECTED ENTITY RENAMING RESULTS")
-    print(f"{'='*60}")
-    print(f"Total rows processed: {len(df):,}")
-    print(f"Original unique entities: {original_unique_count}")
-    print(f"Final unique entities: {len(df['Entity'].unique())}")
-    print(f"Entities consolidated: {original_unique_count - len(df['Entity'].unique())}")
-    print(f"Unique unidentified entities: {len(unidentified_entities)}")
-    
-    # Show mapping coverage
-    mapping_coverage = len(expected_entities & all_entities_in_data) / len(expected_entities) * 100
-    print(f"Mapping coverage: {mapping_coverage:.1f}%")
-    
-    # Show most frequent entities after correction
-    print(f"\n{'='*60}")
-    print(f"TOP 15 MOST FREQUENT ENTITIES (AFTER CORRECTION)")
-    print(f"{'='*60}")
-    top_entities = df['Entity'].value_counts().head(15)
-    for entity, count in top_entities.items():
-        print(f"{count:>4} | {entity}")
-    
-    # Show most frequent unidentified entities
-    if unidentified_entities:
-        print(f"\n{'='*60}")
-        print(f"TOP 15 MOST FREQUENT UNIDENTIFIED ENTITIES")
-        print(f"{'='*60}")
-        unidentified_counts = df[df['Entity'].isin(unidentified_entities)]['Entity'].value_counts()
-        for entity, count in unidentified_counts.head(15).items():
-            print(f"{count:>4} | {entity}")
-    
-    return df
 
-# Run the corrected function
-if __name__ == "__main__":
-    csv_file = 'ner_entity_dataset_superclean.csv'
+def find_missing_entities(ner_csv_path='ner_entity_dataset_superclean.csv'):
+    """
+    Find entities from the entity mapping that are not in the NER entity dataset.
+    Create a CSV file with the missing normalized entities.
+    """
     
-    print("🔧 FIXING AND RENAMING ENTITIES WITH CORRECT RUSSIAN NAMES")
-    print(f"Target file: {csv_file}")
+    print("🔍 FINDING ENTITIES NOT IN NER DATASET")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
     
-    df_fixed = fix_and_rename_entities(csv_file)
+    # Read the NER dataset
+    try:
+        df = pd.read_csv(ner_csv_path)
+        print(f"✓ Successfully loaded NER dataset: {ner_csv_path}")
+        print(f"✓ Total rows in NER dataset: {len(df):,}")
+        print(f"✓ Unique entities in NER dataset: {len(df['Entity'].unique()):,}")
+    except FileNotFoundError:
+        print(f"❌ Error: File '{ner_csv_path}' not found.")
+        return None
+    except Exception as e:
+        print(f"❌ Error reading file: {e}")
+        return None
     
-    if df_fixed is not None:
-        print(f"\n✅ PROCESS COMPLETED SUCCESSFULLY!")
-        print(f"✓ Dataset corrected and saved: '{csv_file}'")
-        print(f"✓ Unidentified entities list: 'unidentified_entities_deduplicated.csv'")
-        print(f"✓ All entities now use proper Russian naming conventions")
+    # Get all entities from the NER dataset
+    ner_entities = set(df['Entity'].unique())
+    
+    # Get all entities from the mapping (both keys and values)
+    mapping_keys = set(entity_mapping.keys())
+    mapping_values = set(entity_mapping.values())
+    all_mapping_entities = mapping_keys | mapping_values
+    
+    print(f"✓ Total entities in mapping dictionary: {len(all_mapping_entities):,}")
+    print(f"✓ Unique normalized entities (values): {len(mapping_values):,}")
+    
+    # Find entities from mapping that are NOT in NER dataset
+    missing_from_ner = all_mapping_entities - ner_entities
+    
+    # Find normalized entities that are NOT in NER dataset
+    missing_normalized = mapping_values - ner_entities
+    
+    print(f"\n{'='*60}")
+    print(f"ANALYSIS RESULTS")
+    print(f"{'='*60}")
+    print(f"Total mapping entities NOT in NER dataset: {len(missing_from_ner)}")
+    print(f"Normalized entities NOT in NER dataset: {len(missing_normalized)}")
+    
+    # Create CSV with missing normalized entities
+    if missing_normalized:
+        missing_entities_data = []
+        
+        for entity in sorted(list(missing_normalized)):
+            # Count how many keys map to this normalized entity
+            mapping_variants = [k for k, v in entity_mapping.items() if v == entity]
+            
+            missing_entities_data.append({
+                'Normalized_Entity': entity,
+                'Number_of_Variants': len(mapping_variants),
+                'Mapping_Variants': ' | '.join(mapping_variants),
+                'Status': 'NOT_FOUND_IN_NER',
+                'Analysis_Date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+        
+        # Create DataFrame
+        missing_df = pd.DataFrame(missing_entities_data)
+        missing_df = missing_df.sort_values('Number_of_Variants', ascending=False)
+        
+        # Save to CSV
+        output_file = 'entities_not_in_ner_dataset.csv'
+        try:
+            missing_df.to_csv(output_file, index=False)
+            print(f"✓ Missing entities saved to: {output_file}")
+        except Exception as e:
+            print(f"❌ Error saving file: {e}")
+            return None
+        
+        # Display top missing entities
+        print(f"\n{'='*60}")
+        print(f"TOP 20 NORMALIZED ENTITIES NOT FOUND IN NER DATASET")
+        print(f"{'='*60}")
+        
+        for i, row in missing_df.head(20).iterrows():
+            print(f"{i+1:>2}. {row['Normalized_Entity']} ({row['Number_of_Variants']} variants)")
+        
+        # Show some examples of variants
+        print(f"\n{'='*60}")
+        print(f"EXAMPLES OF MAPPING VARIANTS FOR TOP ENTITIES")
+        print(f"{'='*60}")
+        
+        for i, row in missing_df.head(5).iterrows():
+            print(f"\n{i+1}. {row['Normalized_Entity']}")
+            variants = row['Mapping_Variants'].split(' | ')
+            for j, variant in enumerate(variants[:5], 1):  # Show max 5 variants
+                print(f"   {j}. {variant}")
+            if len(variants) > 5:
+                print(f"   ... and {len(variants) - 5} more variants")
+        
+        return missing_df
+    
     else:
-        print(f"\n❌ PROCESS FAILED - Please check error messages above")
+        print("✓ All normalized entities from the mapping are present in the NER dataset!")
+        
+        # Create empty file to indicate all entities were found
+        output_file = 'entities_not_in_ner_dataset.csv'
+        empty_df = pd.DataFrame(columns=[
+            'Normalized_Entity', 'Number_of_Variants', 'Mapping_Variants', 
+            'Status', 'Analysis_Date'
+        ])
+        empty_df.to_csv(output_file, index=False)
+        print(f"✓ Empty results file created: {output_file}")
+        
+        return empty_df
+
+
+# Run the analysis
+if __name__ == "__main__":
+    result_df = find_missing_entities()
+    
+    if result_df is not None:
+        print(f"\n✅ ANALYSIS COMPLETED SUCCESSFULLY!")
+        print(f"✓ Results saved to: 'entities_not_in_ner_dataset.csv'")
+        if len(result_df) > 0:
+            print(f"✓ Found {len(result_df)} normalized entities not in NER dataset")
+        else:
+            print(f"✓ All entities from mapping are present in NER dataset")
+    else:
+        print(f"\n❌ ANALYSIS FAILED - Please check error messages above")
