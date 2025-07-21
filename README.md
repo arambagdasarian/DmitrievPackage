@@ -57,4 +57,4 @@ beautifulsoup4
 
 
 Citation
-Pending publication of the paper, please contact aram.bagdasarian@zois.de or sebastian.hoppe@zois.de for citation guidance or pre-publication collaboration inquiries.
+Pending publication of the paper, please contact abagdasarian@college.harvard.edu or sebastian.hoppe@zois-berlin.de for questions or pre-publication collaboration
