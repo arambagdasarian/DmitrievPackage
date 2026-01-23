@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs,longtable,array,geometry,caption,siunitx}
+\geometry{margin=1in}
+\captionsetup{labelfont=bf}
+\title{Network Analysis: Top 20 Actors -- All Periods Combined}
+\author{Automated SNA Report}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Methodology}
+A composite score $0.4\,\text{Degree} + 0.3\,\text{Closeness} + 0.2\,\text{Norm.\ Occurrences} + 0.1\,\text{Edge Count}$ ranks entities across all time periods. RDIF and Dmitriev entities are excluded from rankings.
+\section{Results}
+\begin{table}[htbp]
+\centering
+\caption{Top 20 actors by composite score -- All Periods Combined}
+\label{tab:top20overall}
+\begin{tabular}{r l S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] r r}
+\toprule
+Rank & Actor & {Composite} & {Degree} & {Closeness} & Occurrences & {Edge Count}\\
+\midrule
+1 & Владимир Путин & 0.7404 & 0.9875 & 72.4530 & 8764 & 98985 \
+2 & Сбербанк & 0.6909 & 0.9358 & 70.8172 & 2672 & 58382 \
+3 & Внешэкономбанк (ВЭБ) & 0.6846 & 0.9080 & 71.6794 & 3473 & 59517 \
+4 & Дмитрий Медведев & 0.6821 & 0.9271 & 70.6935 & 2288 & 47732 \
+5 & ОАО «РЖД» & 0.6742 & 0.9022 & 70.7451 & 2226 & 52127 \
+6 & Министерство финансов & 0.6733 & 0.9032 & 70.4424 & 2077 & 52537 \
+7 & Банк ВТБ & 0.6641 & 0.8926 & 70.2834 & 1964 & 42727 \
+8 & ОАО «Газпром» & 0.6618 & 0.8917 & 69.6051 & 1569 & 45904 \
+9 & Московская биржа & 0.6598 & 0.8763 & 70.7011 & 2189 & 43341 \
+10 & Совет Федерации & 0.6597 & 0.8744 & 70.0068 & 1680 & 52740 \
+11 & Федеральная антимонопольная служба (ФАС) & 0.6529 & 0.8821 & 69.1998 & 1475 & 38229 \
+12 & Роснефть & 0.6518 & 0.8677 & 70.0504 & 1747 & 40189 \
+13 & ОАО «Ростелеком» & 0.6466 & 0.8715 & 69.4450 & 2069 & 30166 \
+14 & Дональд Трамп & 0.6450 & 0.8245 & 71.7935 & 4872 & 41822 \
+15 & Сергей Лавров & 0.6396 & 0.8217 & 71.0520 & 2683 & 42944 \
+16 & БРИКС & 0.6391 & 0.8552 & 69.9301 & 1699 & 23467 \
+17 & Дмитрий Песков & 0.6390 & 0.8418 & 70.5089 & 2419 & 28690 \
+18 & Генеральная Ассамблея ООН & 0.6372 & 0.8428 & 69.3504 & 1457 & 36903 \
+19 & Банк России & 0.6262 & 0.8399 & 68.0132 & 1016 & 28283 \
+20 & МВД & 0.6180 & 0.8485 & 65.0560 & 733 & 31877 \\bottomrule
+\end{tabular}
+\end{table}
+\section{Discussion}
+This analysis combines data from all time periods (Pre‑Crimea, Post‑Crimea, COVID, and War) to identify actors with consistent influence across the entire temporal scope.
+\end{document}

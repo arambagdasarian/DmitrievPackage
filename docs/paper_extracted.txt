@@ -1,0 +1,1194 @@
+
+=== PAGE 1 ===
+Paper prepared for the Section “Geopolitics and Economic Statecraft: Elite Strategies in a
+Fragmenting World Order” at the 18th Pan-European Conference on International Relations of the
+European International Studies Association (EISA), University of Bologna, Italy, 25-29 August
+2025
+Intermediaries and Global Restructuring. Exploring
+Russia’s Adaptation Brokerage Networks
+Sebastian Hoppe∗
+January 8, 2026
+Abstract
+Global political-economic fragmentation has significantly enhanced the role of actor
+webs mediating between state agencies, corporate actors, social constituencies, and
+the world economy. Yet this relevance of intermediaries contrasts with their neglect
+in existing scholarship. This exploratory paper pursues three goals: It first provides
+a novel conceptual framework of adaptation brokerage networks (ABNs) - individuals,
+firms, and institutions that mediate between adapting states, economies and societies,
+on the one hand, and mutually reinforcing global patterns of change, on the other.
+Second, the paper proposes an iterative mixed-methods strategy grounded in Social
+Network Analysis to construct, describe, visualize, and compare ABNs across issue ar-
+eas, sectors, and countries. Third, I explore the evolving cross-border networks of Kirill
+Dmitriev, the CEO of the Russian Direct Investment Fund, across four periods from
+2010 to 2025 as an example of how Russia has been adapting to geopolitical ruptures
+and global restructuring. Preliminary evidence points to a high degree of flexibility
+of Dmitriev’s domestic and international networks over time, suggesting a surprising
+capacity of Russia’s state-permeated political economy to remain globally integrated
+amidst war, sanctions, supply chain disruptions, and the constraints of extractivism.
+I argue that a significant mechanism through which the state attains this flexibility
+is the elite broker-mediated repurposing of institutions and agencies for tasks beyond
+their originally envisaged objectives. The conclusion weighs the theoretical benefits of
+a political-economic network approach to Russia’s adaptive capacity against alternative
+explanations.
+Keywords: global political economy, adaptation, networks, brokerage, Russia
+∗Centre for East European and International Studies (ZOiS), Berlin, sebastian.hoppe@zois-berlin.de
+
+=== PAGE 2 ===
+1 Introduction
+In 2025, images of shuttered Western franchises in Moscow are vying for space with head-
+lines about record Russian oil revenues, Russo-Gulf sovereign wealth fund tie-ups, and the
+flash launch of ’friendly’ BRICS payment systems.1On paper, sweeping sanctions, carbon
+tariffs and tech export bans should have strangled Russia’s global reach since at least the
+first half of the 2010s, when Vladimir Putin returned for a third, much more revisionist
+presidency and not much later send his troops to annex the Russian peninsula Crimea - let
+alone since the full-scale invasion of Ukraine in 2022. Yet despite all setbacks, the Krem-
+lin’s economic nerve centre continues to (shadow) ship and import resources and technology
+through new corridors, tap foreign finance, engage substantially in multilateral fora, and
+even tout green(ed) investment projects via a new carbon units registry. Seeking to find
+an explanation for this unexpected resilience that goes beyond Russia’s sheer geographical
+might, fossil weight, or Soviet-induced nuclear arsenal, one necessarily encounters a grow-
+ing body of anecdotal evidence and investigative reporting on the critical role of enabling
+intermediaries. These accounts – most of them journalistic – point to a rich variety of actor
+webs helping the Russian state to adapt to global change: lawyers in Cyprus and London,
+diplomats in Riyadh and Ankara, bankers in Hong Kong and New York, sanction busters
+in EU member states, logistics firms specialised in trade rerouting, and an ilk of globally
+dispersed ideological admirers of the Kremlin’s cause, all of which stitch together Russia’s
+surprisingly enduring global circuits of resources, legitimacy, and influence (G¨ otz and Mac-
+Farlane, 2022; Filis, 2019; Stent, 2019; Melville, Akhremenko, and Mironyuk, 2019; G¨ otz
+and Merlen, 2019).
+However, what these invaluable investigations lack is a systematic account of how these
+actors operate and how their networks evolve – not only with respect to sanction evasion
+schemes and supply chains feeding Russia’s war efforts, but more broadly under the “polycri-
+1. I am deeply grateful to Anna Filippova, research assistant at ZOiS, and Aram Bagdasarian, student at
+Harvard University and research intern at ZOiS from May to July 2025, for their invaluable assistance in
+preparing this paper.
+1
+
+=== PAGE 3 ===
+sis” conditions of global restructuring in the 21st century (Helleiner, 2024). These conditions
+include the multipolar splintering of diplomatic conduct, the fracturing of economic inter-
+dependence, decarbonization becoming a physiologically necessary yet politically contested
+imperative, and calls for on-shoring production and unmediated access to natural resources
+amidst heightened geopolitics.
+To provide such an account, this paper advances the concept of adaptation brokerage
+networks (ABNs) – cross-border webs of individuals, firms, and institutions that mediate
+between a state’s idiosyncratic domestic order and a changing and increasingly fragmented
+global political economy. Unlike classic theories of globalization, which for long assumed the
+global emergence of a unified transnational capitalist space, this paper maintains that ABNs
+flourish precisely because today’s order is incoherent: Overlapping yet porous sanctions
+regimes, clashing yet nonetheless economically interdependent geopolitical blocs, and rival
+climatestandardsfittingvariegated(non-)growthregimespullindifferentdirections, eliciting
+highly uneven national trajectories of political-economic adaptation. In this environment,
+the management of power hinges on privileged access to elite networks and rent circulation
+schemes, materializing in platforms, corridors, loopholes, and exemptions, which only – as
+this paper seeks to demonstrate – well-placed state-centred elite brokers can unlock.
+The study of networks and brokers can build on a long-standing strand within Interna-
+tional Political Economy (IPE) scholarship (Hafner-Burton, Kahler, and Montgomery, 2009;
+Hafner-Burton and Montgomery, 2009; Oatley et al., 2013; Busch and Juska, 1997; Emmert-
+Streib et al., 2018; Kobrin, 1997; van Apeldoorn and Graaff, 2016; Graaff, 2011). Moreover,
+several studies single out brokerage as one of the key mechanisms steering network dynamics
+(Goddard, 2009; Halevy, Halali, and Zlatev, 2019; Kwon et al., 2020; Martinus et al., 2021;
+Sigler, Neal, and Martinus, 2023; Subacchi, 2008; Xiang, Lin, and Wang, 2023). In SNA,
+a broker is usually defined as an intermediary that occupies a crucial network position –
+a “structural hole” (Burt, 2010) – between other actors, whom it allows to interact by fa-
+cilitating financial, material or knowledge exchange. At a more abstract level, brokers can
+2
+
+=== PAGE 4 ===
+be understood as managing relations among states, institutions, companies, and individuals
+by means of relational capital (Kale, Singh, and Perlmutter, 2000, p. 218), whereas they
+themselves often lack direct control over military resources or the capacity for state action.
+At the same time, brokers are not independent actors but usually belong to the institutional
+or economic spaces of one or more states - they are "state-centred" without necessarily be-
+ing part of the formal state apparatus - or fall under the authority supranational bodies or
+multinational corporations. The degree to which brokers are subject to direct state or or-
+ganizational control varies, however (Laruelle and Kevin Limonier, 2021) . In fact, the very
+quality of an actor as a broker strongly depends on the context, in the sense that brokers in
+one concrete set of historical and spatial conditions may lose their broker quality in another
+set of conditions. The activities of brokers are often geographically dispersed, temporally
+limited, sector-specific, and typically exercised across borders (Subacchi, 2008).
+Brokers are critical for how both states and societies adapt to macro-structural change,
+that is, multilevel reconfigurations in global diplomatic, political and economic processes.
+Maintaining or gaining access to resources, knowledge and institutions via brokers in a
+changing environment allows state elites, companies and societal groups to reduce insecu-
+rity and organize modifications to their own strategies of social and economic reproduction.
+Paraphrasing one of Nassim Nicholas Taleb’s (2016) popular bestsellers, brokers and broker
+networks, if thoroughly organised, can contribute to the “anti-fragile” structure of a political
+economy. Adaptation can thus be defined as the social, economic, political and cultural ad-
+justment of individuals, groups or states to actual or expected changes in external processes,
+practices and structures, which aim at moderating potential damages or benefitting from
+opportunities associated with this change.2
+Applying network approaches to the case of post-Soviet Russia in particular has been
+highly productive. Studies of what some characterize as a the “Russian network state”
+(Moshes and Kononenko, 2011) include the analysis of patron-client networks as drivers
+2. This definition has been adopted in a modified way from United Nations (2025).
+3
+
+=== PAGE 5 ===
+of regime personalization (Baturo and Elkink, 2016; Leeson et al., 2024), the networked
+management of regional governance (Berg-Nordlie, Holm-Hansen, and Kropp, 2018) and
+the military-industrial complex (Shkurenko et al., 2025), personal networks as facilitators of
+state-building(Easter,1996),intra-stateelitenetworks(KryschtanowskajaandWhite,2011),
+networks as means of everyday informal exchange (Ledeneva, 1998; Michailova and Worm,
+2003; Rose, 2000), patronage networks as foreign policy tools (Marten, 2013), networks as
+bottlenecks of financial regulation (Viktorov, 2015), networks of treaties in Russia’s regional
+policies (Willerton, Slobodchikoff, and Goertz, 2012), and BRICS as a networked geopolitical
+structure (Жданов, 2013). However, almost none of these studies, while being conceptually
+innovative and empirically rich, systematically utilizes the methodological registers of SNA
+for its analysis, both in terms of large-scale data collection and network construction as well
+as regarding the analytical and comparative strategies applied to the network data. This
+has led to a rather eclectic image of the Russian network state, which remains unrelated to
+both Russia’s broader political-economic trajectory as well as global structural change more
+broadly.
+Nonetheless, the above studies indicate that Russia under Putin provides a well-placed
+laboratoryforthestudyofnetworkedadaptationandtheroleofbrokerage. Ontheonehand,
+it is a critical and information-rich case of personalist and networked authoritarian politics,
+which is relatively well-covered by daily media publications and investigative reporting as
+well as area-focused scholarship. Moreover, since at least the Global Financial Crisis in
+2008 (GFC), the Russian state has faced immense external pressure to adapt its extractivist
+growth model (Gaddy and Ickes, 2010), putting severe stress on the networks managing
+Russia’s political economy. Since 2014, furthermore, Moscow has faced ever tighter Western
+sanctions while simultaneously deepening ties with Gulf sovereign funds, Chinese develop-
+ment banks, and climate finance platforms, to name only a few. In fact, Russian attempts
+at import substitution and industrial policy can be traced back even before its fallout with
+Ukraine, starting in the winter of 2011/12 with Putin’s orchestrated return to the presiden-
+4
+
+=== PAGE 6 ===
+tial office. In attempting to reinvigorate Russian industry and diversify trade partners, Putin
+has not only pursued a more conservative and ideologically grounded turn in domestic and
+economic policy-making, including a much more confrontational stance vis-` a-vis the West
+(Bluhm, 2023). The Russian state elite and its bureaucracy were also adapting to global
+macro-processes – changes in global finance after the GFC, the consolidation of sanctions as
+a tool of statecraft in the wake of Western policies vis-a-vis Iran, Libya and Syria, long-term
+decarbonization, and the emergence of new multipolar diplomatic networks. These macro-
+processes represent both profound challenges and new opportunities for Russia’s political
+economy that go beyond the Kremlin’s short-term management of the consequences of its
+ill-fated campaign to subjugate Ukraine.
+On the other hand, despite its centrality in the study of authoritarianism, global resource
+politics and sanctions, the Russian case remains under-explored in important empirical,
+theoretical and methodological aspects. Empirically, there are almost no network studies
+on the role of border-crossing webs linking Russia to different realms of the global order
+3. Theoretically, the study of networks in Russia hardly ever discusses the repercussions
+of network dynamics against the context of Russia’s broader political-economic trajectory
+and global integration, such as its capacity to adapt to structural change. One of the most
+pressing and obvious questions, namely to what extent Russia’s networks function better
+in certain sectors than in others, and what this means for the overall adaptability of the
+Russian political economy, has not been raised at all. In fact, this theoretical gap surpasses
+Russian politics: despite surging scholarly interest in modes of adaptation, resilience- and
+capacity-building, and state-led (re)actions vis-` a-vis the global polycrisis, there has been a
+conceptual neglect of the uneven individual, institutional and corporate networks, strategies
+and resource exchanges facilitating adaptation on behalf of state elites, corporate actors
+and social constituencies (an exclusion being Graaff, 2012). This is despite the fact that
+the global restructuring of trade, finance and production amidst geopolitical conflict and
+3. Notable exceptions include the foreign policy analyses by Willerton et al., 2012 and Marten, 2013
+5
+
+=== PAGE 7 ===
+increasing multipolar fragmentation has significantly enhanced the role of intermediaries.
+Finally, inmethodologicalterms, muchofthewidertoolbox, analyticalstrategiesandmetrics
+of (multiplex) SNA have remained virtually untapped in network studies on Russia. This
+is not a pedantic call for more methodological rigour as an end in itself: The failure to
+ground the study of networks in and from Russia firmly in SNA methodologies has not
+only made it more difficult to articulate the contributions that the Russian case can make
+to transdisciplinary network theory. It also makes it harder to bring the insights from the
+Russian case into a comparative dialogue with other network states facing similar adaptation
+imperatives.
+Addressing this threefold gap, the paper seeks to make the following contributions. First,
+it offers a new conceptual framework that integrates SNA with the study of state-led adap-
+tation in the global political economy. The paper specifies characteristic core mechanisms
+of ABNs and derives hypotheses about how important network metrics should shift after
+structural shocks. Second, I propose a mixed-methods strategy that pairs multiplex SNA
+with qualitative case study research techniques. Publicly documented node, edge, events and
+source template sheets (to be published separately with the project’s conclusion as a compre-
+hensive dataset4), including source confidence scoring, make the approach transparent and
+replicable. Third, I provide preliminary evidence of Russia’s ABN in late Putinism, tracing
+how its topology re-configured before and after Russia’s annexation of Crimea (2014), during
+the global COVID-19 crisis (2020-21), and the full-scale invasion of Ukraine (2022). For this
+analysis, I construct a network around one particular figure who stands at the nerve centre
+of Russia’s adaptive web: Kirill Dmitriev, since 2011 CEO of the Russian Direct Invest-
+ment Fund (RDIF) and, since 2025, Special Presidential Envoy on Foreign Investment and
+Economic Cooperation. This paper treats Dmitriev and his extended network as a window
+into and exemplary case of Russia’s ABN. Like few others, Dmitriev’s career illustrates the
+4. The paper is part of the research project Adaptation Brokers: Global Structural Change and the Political
+Economy of Russian Sovereigntism (SOVBROKE) atthe Centre for East European and International Studies
+(ZOiS)in Berlin.
+6
+
+=== PAGE 8 ===
+repertoire of modern brokerage: socialized and educated in both Russia and Western top-tier
+universities, international career without losing touch to the heights of Russian state power,
+later facilitator of co-investments with Blackstone and Goldman Sachs, among others; cre-
+ator of joint funds with Mubadala and PIF after sanctions; vaccine diplomacy with sovereign
+lenders during the COVID-19 pandemic; and most recently, an ESG rebranding of Russian
+projects to court new pools of “green” capital. His extended, border-crossing networks, the
+domestic and international institutions he has engaged with, the international deals he has
+helped facilitate and, not least, him being close to Putin, thus offer a living laboratory for
+testing the ABN concept and exploring how ABNs operate empirically.
+The paper’s preliminary findings suggest that Russia’s resilience in light of geopolitical
+pressure, sanctions and the limits of extractivism has only little to do with clever policies,
+hidden reserves or alternative payment systems. For they are merely the outcome of a highly
+adaptive class of intermediaries who reroute, relabel, and re-legitimize resources and assets
+across jurisdictional seams at the service of Russian state power (Lambroschini, 2024; Shaw
+andIordachi, 2023). TheevidencepointstoahighdegreeofflexibilityofDmitriev’sdomestic
+and international networks over time, suggesting a surprising capacity of Russia’s political
+economy to remain globally integrated amidst war, sanctions, supply chain disruptions, and
+the constraints of extractivism. More specifically, I argue that a significant mechanism
+through which the state attains this flexibility is the elite broker-mediated repurposing of
+institutions and agencies for tasks beyond their originally envisaged objectives. The RDIF,
+headed by Dmitriev, is a prime example of this institutional repurposing.
+By bringing SNA into dialogue with critical political economy debates, the paper shows
+that the real story of global fragmentation is written not only in tariffs and treaties on na-
+tional re-industrialization, but in the relational infrastructures that let elites, resources and
+information pass through and operate through the public and hidden emerging networks
+along the polycrisis. In the Russian case, this infrastructure is, above all, inextricably inter-
+woven with the personalistic fabric of Russian statehood and has demonstrated a surprising
+7
+
+=== PAGE 9 ===
+flexibility and adaptability under the pressures of world market volatility, political contes-
+tation, and even war. This is not to argue in favour of the supposed sustainability and
+functionality of the Russian growth model. Anno 2025, the country’s political economy is
+unbalanced and subject to serious distortions. However, the implication of this paper is that
+the ability of the Russian state elite to withstand these deep crises, if not to resolve them, by
+means of personalism, ABNs, and institutional repurposing should not be underestimated.
+This holds all the more true in a world that is witnessing a return of personalist rule at
+the cost of depersonalised state structures (Hanson and Kopstein, 2022), opening manifold
+“interfaces” for Russia’s ABNs across the globe (Hoppe, forthcoming).
+The remainder of the paper proceeds as follows. Section 2 develops the conceptual frame-
+work of ABNs, locates it within wider IPE discussions about global economic restructuring,
+and specifies the core mechanisms of ABNs. Section 3 details the data sources for this paper
+and describes the methodological workflow, including the construction of the Dmitriev net-
+work and introduction of important network metrics. Section 4 maps Dmitriev’s network,
+highlightingbothitsgeneralarchitectureandpatternsaswellasitsadaptivereconfigurations
+after major geopolitical, crisis and regulatory shocks. Section 5 concludes by weighing the
+theoretical benefits of a political-economic network approach to Russia’s adaptive capacity
+against alternative explanations and suggesting avenues for globally comparative research
+on ABNs.
+2 Adaptation Brokerage Networks: A Conceptual Frame-
+work
+The ABN framework is predicated on three complementary concepts, each of which focuses
+on a different aspect of the nexus between state strategies, networks, and the global political
+economy: the networked structure of globalization, adaptation as both an proactive strate-
+gic and reactive process pursued by states, and brokers as managers of cross-border rent
+8
+
+=== PAGE 10 ===
+channelling. This section describes each of these aspects in more detail. When considered
+collectively, they form the three pillars of a conceptual framework that can shed light not
+only on Russia’s relative resilience in late Putinism, despite the geopolitical and economic
+pressures it has faced. As the paper’s conclusion argues, it may also elucidate and compare
+the political and economic trajectories led by states in other countries that are also grappling
+with similar challenges emerging from global restructuring.
+First, while the idea of a networked global political economy can be found throughout the
+modern history of economic thinking, it has gained significant trajectory with the discourse
+on globalization and the transformative impact of cross-border information and resource
+flows (Kobrin, 1997). A host of scholars recast globalization in network terms during the
+1990s. Castells’s Network Society thesis, to pick a widely discussed example, argued that
+new information-technology networks span the globe without boundaries, creating “a new
+spatial architecture” that links major cities into a single world-system (Castells, 2010). In
+a similar vein, Saskia Sassen’s Global Cities research posited a “new spatial order” under
+globalization, which would be organized by networks of global metropoles connected by
+digital infrastructures and flows of people, capital and culture (Sassen, 2013). Economists
+andgeographerslikewiseshiftedtonetwork-basedmodels,showingthattransnationalwebsof
+firmsandsuppliers–oftencalledglobalproductionnetworks(GPNs)orvaluechains–arethe
+“critical organizational platforms” coordinating world production (Yeung and Coe, 2015). In
+short, from the mid-1990s onward the dominant accounts of globalization supplanted linear
+or hierarchical metaphors with an emphasis on interlocking networks of power, finance,
+information and culture.
+Even as growth in global trade and investment has slowed or stalled in recent years, schol-
+ars continue to use network concepts to explain the contemporary landscape. Proponents
+of the network view note that globalization’s underlying web of ties remains in place – and
+indeed can be exploited for advantage – even amid protectionist backlashes. For example,
+Farrell and Newman (2019) show that key global economic networks are highly asymmetric:
+9
+
+=== PAGE 11 ===
+major powers that jurisdictionally control central nodes (such as financial messaging or in-
+ternet platforms) can “weaponize interdependence” by using their network position to gather
+intelligence (the “panopticon” effect) or to choke off rivals (the “chokepoint” effect, see also
+Fishman, 2025). Such analysis implies that the persistence of networked structures – and
+their embedded power relations – is precisely what makes globalization resilient and strategi-
+cally important, even in a geoeconomic “slowbalization” era characterized by fragmentation.
+Likewise, scholars of economic geography find that cross-border production networks con-
+tinue to “constitute the long-term structural architecture of the global economy” (Yeung and
+Coe, 2015). Thus, whether globalization is waxing or waning, the network paradigm remains
+central for understanding how trade, finance and communication reconfigure: it highlights
+the very patterns of both interconnection and strategic control that survive geopolitical
+tensions, crises or efforts to de-globalize.
+Such network thinking also illuminates how states, firms and societies adapt to exter-
+nal shocks and systemic change. For adaptation often occurs not through isolation but
+through reconfigured ties. In practice, sub-national and national actors frequently respond
+to global challenges (from economic crises, climate change to health pandemics) by form-
+ing new transnational networks that redirect or pool resources, share knowledge and foster
+new exchange patterns. Recent studies document that cities and regions form coalitions
+(e.g. climate-city networks like C40) based on networks that allow the included actors to
+weather disruptions that no single city or state could face alone (Trivi˜ no-Salazar, 2023).
+Other examples include policy-diffusion or expert networks (for instance in public health or
+environmentalgovernance), whichmayserveasconduitsforinnovation, allowingevenweaker
+states or communities to adopt collective safeguards. In short, a networked lens shows adap-
+tation as a multi-level, collaborative process: resilience derives not just from internal reforms
+(policies) but also from how effectively actors plug into wider webs of exchange and support
+(politics and relationships).
+Second, in contrast to a passive role in the enforcement of rules, proactive state strate-
+10
+
+=== PAGE 12 ===
+gies of adaptation are of crucial importance in the global network economy. State elites and
+corporate heads experience or anticipate actual or future changes in the external contexts
+in which they operate and craft formal and informal strategies to cope with this change.
+This stance contrasts with traditional state-as-actor views: In adapting to a changing order,
+states, rather than building on their economic and military capabilities alone, depend on
+transnationally integrated intermediaries. In effect, adaptation brokerage networks allow a
+state elite to position themselves as central game players, actively reworking transnational
+ties to shape outcomes. Consistent with network-based IPE, network models “derive state
+capabilities and influence from the network structure” (Oatley et al., 2013, p. 137) – meaning
+states gain power from how they are connected rather than solely from their material capa-
+bilities. Such a perspective foregrounds state-led initiatives (through policy, elite coalitions
+and business networks) as strategic levers in global systems.
+Network-based adaptation often aims to preserve rents, regime stability, or continued ac-
+cess under systemic change. For example, rentier Gulf monarchies have created or expanded
+sovereign wealth funds to centralize investment and stabilize patronage: studies show these
+funds were introduced as “adaptive responses to external pressures” and as tools to sustain
+political authority under volatile conditions (Montambault Trudelle, 2023). China’s lead-
+ership likewise deploys state-centric networks: one analysis finds that China’s intense state
+control of its financial institutions and the “internalization” of capital markets can itself be
+understood as “an adaptive strategy” securing its development model within global capital-
+ism (Birley, 2023). In Russia’s case, the Kremlin has forged a parallel economy after 2022,
+re-routing trade and finance through rouble- and yuan-based mechanisms beyond Western
+reach(Qu´ enelle,04.03.2025; N¨ olke,2025). Chineseexportsnowsupplyroughly70–90percent
+of key imported inputs to Russia (Ng and Ma, 17.05.2024), exemplifying how non-Western
+powers leverage global production and finance networks strategically to sustain core indus-
+tries amidst external pressure. In each instance, ruling elites proactively rewire networks
+– pooling rents at home and securing vital links abroad – rather than simply reacting to
+11
+
+=== PAGE 13 ===
+external shocks.
+This perspective highlights that adaptation is both strategic and reactive: states delib-
+erately engineer network linkages to safeguard core interests in the face of external change.
+Scholars of networked global governance emphasize that relational ties – not just raw ca-
+pabilities – shape international order. Thus even without formal rule-making authority,
+regimes can preserve rents by repositioning elites within global webs. Under conditions of
+systemicchange(e.g., energytransitions, traderestructuring, blocformation), suchproactive
+networking can smooth domestic transitions and protect regime stability. In short, ABNs
+recast messy and disorderly change into a controlled brokerage game: the state itself, may it
+be driven by ideology, opportunity or fears over regime survival, acts as a network manager,
+rewiring connections to maintain rents and political authority.
+Third, the operation of networks in the world economy at the service of state elites is
+predicated on the existence of brokers, which manage the access to, control of and distri-
+bution of resources via intermediate webs. Rather than the price-mediated, depersonalised
+process described in liberal economic textbooks on globalization, networked brokerage is a
+highly political and conflictual endeavour. In fact, brokerage often carries an inter-systemic
+quality, mediating between competitive capitalist spaces of enforced profit-seeking and pre-
+or post-capitalist spaces of monopolist rent extraction (Hoppe, forthcoming). The mech-
+anisms specified below – translation, substitution, shielding – speak to the inter-systemic
+quality of network brokerage.
+Classic network theory and Sociology frame brokerage in terms of actors spanning gaps or
+“structural holes” between groups (Burt, 2010) and forming “weak ties” (Granovetter, 1973)
+that transmit novel information and allow resource exchange between otherwise separated
+actors.5Burt’s seminal work shows that such brokers gain strategic advantage by bridging
+5. Granovetter’s concept of weak ties highlights that casual acquaintances – not close friends – are often
+the most valuable conduits for new information and opportunities. His study of job seekers revealed that
+while strong ties (e.g. family, close friends) share overlapping knowledge, it is weak ties that bridge separate
+social circles and introduce novel contacts, data, or job leads. These weak links, though low in emotional
+intensityandinteractionfrequency, serveascrucialinformationbridgesacrossotherwisedisconnectedgroups,
+enabling diverse flows of influence and innovation across social networks. In IPE, weak ties have become a
+12
+
+=== PAGE 14 ===
+disconnected actor clusters – controlling information flows and substituting isolated contacts
+with a connected network position. Actor–Network Theory (Latour, 2007) offers a comple-
+mentary view: translation is an active process of enrolling and transforming actors, so that
+one actor or artifact may stand in for or substitute another within the network. Network
+closure (Coleman, 1988) then plays a shielding role: dense ties within a group build trust
+and shared norms that insulate insiders even as brokers connect to outsiders. In sum, these
+frameworks conceptualize brokerage as involving three core mechanisms (see Table 1): trans-
+lation of meaning across domains, substitution of nodes or resources when ties are rewired,
+and shielding of core ties by network structure.
+ScholarsofIPEandregulationhaveidentifiedthesemechanismsinpractice. Forinstance,
+analyses of sanctions-evasion networks document intense substitution: sanctioned firms are
+routinely replaced by new shell companies or intermediaries, so that “sanctioning a person
+or a company will just cause another to appear in its place” (Allison and Saiz Erausquin,
+2023). Intransnationalregulatoryregimes, technocraticbrokers oftenshieldthemselvesfrom
+accountability by forming expert networks that insulate policy advice from democratic over-
+sight (Freyburg et al., 2017). Knowledge-brokering studies of climate and finance similarly
+find active translation of norms across borders – as science is reframed into policy language
+– alongside substitution of formal channels by alternative institutions. For example, recent
+research links rising climate risk to an expansion of unregulated shadow-banking networks
+that substitute for traditional banks under tight regulation (Deku and Morris, 2025).
+core metaphor for understanding how states and global actors navigate fragmented global systems. Farrell
+and Newman’s framework of “weaponized interdependence” builds on this logic: states that control central
+nodes in global networks (like banking rails or internet infrastructure) can disrupt adversary access, while
+states outside these central circuits rely on weak ties – such as alternative legal channels, informal brokers,
+and non-Western partners – to maintain linkages and circumvent chokepoints. Likewise, literature on global
+value chains emphasizes that peripheral countries often build resilience by cultivating distant, low-density
+connections to multiple global hubs, rather than relying solely on deep ties with a single dominant partner –
+effectively using weak ties as a buffer against shocks. Thus, the concept of weak ties explains how informal,
+flexible, and cross-cutting connections sustain regimes under pressure. They enable states or elites to bypass
+formal barriers or dominant powers by creating alternative pathways – hallmarks of adaptation brokerage
+networks. In this way, weak ties are not just social phenomena; they’re strategic tools enabling states and
+adaptation brokers to remain connected even when formal channels fray under sanctions, geopolitical rivalry,
+or competitive exclusion.
+13
+
+=== PAGE 15 ===
+Together, these cases illustrate how global networks use the inter-systemic translation
+of ideas and practices, the substitution of actors, trade connections, or rent channelling
+schemes, and the shielding via overlapping institutions to circumvent constraints in sanctions
+evasion, global financial regulation, climate governance and diplomatic exclusion. Table 1
+provides an overview of these three mechanisms, including definitions, descriptions of the
+state-mediated processes by which network actors identify external imperatives to adapt
+and react accordingly, and examples for each of the three mechanisms. Moreover, the table
+indicates the network signatures most affected by the respective mechanism. Each of these
+signatures will be introduced in more detail in the methodology section of the paper.
+14
+
+=== PAGE 16 ===
+Table 1: Mechanisms, Definitions, Processes, Network Signatures, and Examples
+Mechanism Definition Process Network Signature Examples
+Translation Turning a domestic logic
+or asset into a form legi-
+ble to an external regimeIdentify domestic projects
+or rent streams that for-
+eign rules would reject.
+Reframe documentation,
+accounting, marketing to
+meet target standards.
+Broker certification via
+specialized intermediariesHigh betweenness scores
+for dual-embedded trans-
+lators bridging domestic
+and foreign clusters.
+Dense cross-layer ties be-
+tween source and target
+layers.Rebranding a petrochemi-
+calupgradeasa“greenhy-
+drogen” project.
+Issuing ICMA-compliant
+Green Bonds for state
+bank lending.
+Substitution Replacing a blocked chan-
+nelwithanalternatepath-
+wayDetect when primary
+corridor is closed (e.g.
+SWIFT, trade licence).
+Identify substitute route
+(another country, mecha-
+nism).
+Forge new partnerships or
+shell entities to rewire the
+network.Sharp edge churn post-
+shock, with old ties
+dissolving and new ones
+emerging.
+Formation of modu-
+lar sub-clusters (e.g.
+sanctions-evasion cells).Rerouting finance from
+EU clearinghouses into
+Gulf-based payment sys-
+tems.
+Using a Dubai shell com-
+pany for sanctioned im-
+ports.
+Shielding Creating buffer zones so
+intermediaries absorb le-
+gal, material or reputa-
+tional riskAssess which assets or ac-
+tivitiescarryhighestexpo-
+sure.
+Construct protective layer
+(shell, nominee, SPV).
+Maintainbyrotatingman-
+agers or refreshing struc-
+tures.High clustering around
+central principals, forming
+a protective ring.
+Persistent two-hop ties:
+principals connect exter-
+nally only via shield nodesHolding trades via a
+Cayman-registered insur-
+ance vehicle to protect
+the parent firm.
+Using a nominee trustee
+in a third country to
+custody sensitive assets.
+15
+
+=== PAGE 17 ===
+The ABN framework allows for the formulation of three theoretical hypotheses, each
+examining how network structure and dynamics respond to external pressures and internal
+strategies of adaptation. While not all of the propositions can be explored in this paper,
+particularly because the construction and multiplex analysis of network layers has not yet
+been implemented, they shall serve the overarching project as a guidance.
+H1: Externalcrisessystematicallyincreasecross-layerbrokeragedensitywithin
+adaptation brokerage networks.
+Intheoreticalterms, thishypothesispositsthatwhenformalinstitutionaltiesbreakdown
+due to economic sanctions or trade barriers, actors seek alternative pathways to maintain
+essential economic and political linkages. Networks respond strategically by activating and
+intensifying brokerage roles across thematic layers (finance, sanctions-evasion, diplomacy,
+climate). Empirically, this can be tested through the measure of brokerage density, which
+captures the extent to which actors occupy bridging positions between distinct layers. An
+increase in brokerage density after a crisis event (for example, a new sanction tranche) would
+indicate that brokers are actively reconfiguring the network to sustain resource flows, thus
+demonstrating strategic adaptation.
+H2: Actors with higher degrees of domestic political embeddedness exhibit
+greater agility in transitioning between network layers.
+This hypothesis suggests that political elites, state-owned enterprises, or corporate actors
+closely connected to central political decision-makers will exhibit higher strategic flexibility
+and therefore more frequent movements across network layers. The theoretical rationale
+is that politically embedded actors enjoy superior access to information, legitimacy, and
+resources, allowing them to rapidly pivot across finance, sanctions, diplomacy, and climate
+governance spheres. Empirically, layer transition frequency (LTF) offers a robust measure
+of such agility: actors with higher LTF scores are those who repeatedly shift their presence
+between different layers over time. Testing this hypothesis involves comparing LTF scores
+16
+
+=== PAGE 18 ===
+across nodes while simultaneously measuring their degree of political embeddedness (e.g.,
+formal political ties, board appointments, or direct state ownership).
+H3: More centralized adaptation brokerage networks correlate with shorter
+adaptation lags following external shocks.
+This third hypothesis asserts that centralization within adaptation brokerage networks –
+where fewer intermediaries coordinate more connections – facilitates quicker and more effi-
+cient network-level responses to external disruptions, such as geopolitical shifts or regulatory
+shocks. The theoretical underpinning is that centralized networks can rapidly mobilize re-
+sources, disseminate information, and enforce new organizational routines through tightly
+coordinated brokerage. To test this empirically, one could compute network centralization
+metrics (e.g., centralization based on node degree or betweenness centrality) and measure
+the temporal gap (adaptation lag) between an external shock (as recorded in the Events
+sheet) and subsequent shifts in network structure, particularly the establishment of new or
+substitute ties. A negative correlation between network centralization and adaptation lag
+would support this hypothesis, underscoring the strategic advantage conferred by concen-
+trated brokerage structures.
+The preliminary evidence presented in this paper, especially the finding that institutions
+such as the RDIF have been repurposed for developmental, diplomatic, health and sanction-
+evasion objectives, depending on the geopolitical and economic context in which the Russian
+state had to operate, points to the validity of the cross-layer brokerage capacity of important
+network actors (H1). Moreover, as the tentative network analysis shows, the RDIF has
+remained tightly integrated in Russia’s domestic political economy, positioning it as a highly
+agile adaptation broker for the Russian state (H2). Finally, centralization within the RDIF’s
+networks, facilitated by the well-networked broker Dmitriev, serves the Kremlin’s capacity
+to quickly respond to geopolitical "windows of opportunity" (H3), such as the engagement
+between Russia and the US after the inauguration of the Trump II administration in 2025.
+While the evidence presented below remains indicative, further data cleaning, advanced node
+17
+
+=== PAGE 19 ===
+attributing and edge layering will allow a more fine-grained, multiplex network analysis of
+the above hypotheses.
+3 Methodology
+This section outlines the methodological approach used to operationalise the ABN concept.
+The methodology aims at capturing, visualising, empirically analysing and comparing ABNs.
+In a first step, I justify the case selection and describe how the networks around Dmitriev
+and the RDIF have been reconstructed. The second sub-section details the data collection
+strategy, analytical tools and metrics applied to the data. The third sub-section reflects on
+the limitations and challenges encountered throughout this early phase of the project and
+lays out the future steps allowing for a more fine-grained, robust and comparative network
+analysis of Dmitriev’s ABN.
+3.1 Case Selection and Network Construction
+To operationalize the ABN framework, the paper focuses on a critical, information-rich ego-
+network: Kirill Dmitriev, CEO of the Russian Direct Investment Fund (RDIF) since 2011
+and, since 2025, Special Presidential Envoy on Foreign Investment and Economic Cooper-
+ation. Dmitriev has been operating at the service of Russian state power across various
+thematic arenas: his fields of activity range from global finance, sanctions evasion, climate
+and environmental, social and governance (ESG) initiatives, and multipolar diplomacy, mak-
+ing him an ideal gateway through which to observe how networks and brokerage help Russia
+adapt to global change. Moreover, existing scholarship has identified sovereign wealth funds
+(SWFs), such as the RDIF, as one of the main state-led vehicles for adapting to the macro-
+structural processes of globalisation and financialisation (Haberly, 2011). At the same time,
+sociological research on the management and practices of non-Western SWFs in particular
+indicates that these funds are deeply permeated by personalist logics and cannot be grasped
+18
+
+=== PAGE 20 ===
+by an aggregate analysis of investment flows alone (Montambault Trudelle, 2023). Therefore,
+focusing on one particular individual actor (Dmitriev) in charge of a state-related economic
+institutionalvehicle(RDIF)andconstructinganego-networkarounditkeepstheexploratory
+phase of the project tractable while maximizing theoretical leverage: If ABN mechanisms
+are visible around a well-documented broker, they are likely to be present in other realms of
+Russia’s political economy and in comparative constellations in other countries.
+To capture the fact that Dmitriev as well as other individuals often occupy formal roles
+within organizations, the constructed Node Sheet is multiplex: It includes every distinct
+actor – whether a person, a company, a government agency or an NGO – and distinguishes
+them by node type attributes. In this paper, reflecting the present, exploratory stage of
+the research project, only individual and organizational actors are distinguished from one
+another, whereas the latter include simply all non-individual members (firms, organizations,
+institutions, agencies, funds etc.). Categorising nodes in a more fine-grained way will later
+allow the project to filter and combine modes at will (for example, to analyse only corpo-
+rate networks, only personal ties, or the full multimodal graph) without losing sight of the
+fact that people like Dmitriev serve as crucial entry-points into organizational or corporate
+structures.
+The Edge Sheet records two broad families of relationships. First, one attributional
+category links individuals to the companies, organizations or institutions they lead or serve
+(e.g. as board member, CEO or minister). A second attributional category keeps track
+of transactional edges (e.g. co-investments, joint ventures, legal services etc.) that link
+firms, funds, organizations and institutions to one another to capture deals, investments,
+partnerships and joint projects. For this paper, however, the Edge Sheet only contains a
+co-occurrence score for each edge, that is, how often two actors appear in different Russian-
+language media articles.
+In the further course of the project, I will apply an automated sentiment analysis to
+assign each edge to one or more thematic layers – finance, sanctions, diplomacy, climate
+19
+
+=== PAGE 21 ===
+– using binary flags (Y/N). Such a nuanced edge attribution based not only on weighted
+co-occurrences, but also on different thematic layers, allows for differentiated analysis of
+brokerage strength and resource flows within the adaptation brokerage networks. This mul-
+tiplex layer assignment opens possibilities for a systematic analysis of cross-layer brokerage
+and strategic transitions across different network domains. Future analyses conducted as
+part of the project may isolate affiliation structures, trace pure deal networks, or map the
+combined brokerage topology in which people and organizations co-produce Russia’s adap-
+tation strategy.
+By anchoring on an ego-centric design, the paper maintains analytical focus on adap-
+tation brokerage while still mapping the secondary circuits that connect Russia to various
+regimes of the global political-economic order. Additional thresholds, especially for node
+occurrences and co-occurrences, mitigate the risk of combinatorial explosion and help to
+prioritize significant over incidental relationships. Prescribing a clear cut-off also enhances
+the transparency and reproducibility of the approach, indicating which nodes qualify, and
+under what conditions.
+3.2 Data Collection and Current Analytical Strategy
+This paper argues that the main challenge for research into Russian and transnational net-
+works more generally is not necessarily accessing data, but structuring and interpreting it.
+For the digitalisation of information and the proliferation of online media over the past two
+decades have fundamentally transformed the research landscape for geopolitics, (global) po-
+litical economy, and elite sociology. With the advent of large-scale, text-based datasets —
+spanning news archives, government disclosures, leaked documents, and business databases
+— scholars now have (theoretically) unprecedented opportunities to map and analyse elite
+networks and their strategies of adaptation in real time. However, as Limonier and Audinet
+(2022) caution, this digital turn also introduces substantial methodological challenges. Is-
+sues such as source bias, platform instability, and the deluge of unstructured data ("noise")
+20
+
+=== PAGE 22 ===
+require balancing the speed and scale of computational techniques with rigorous, transparent
+data curation and cleaning protocols.
+A common thread running through recent research on Russian and transnational elite
+networks is the use of computational tools to construct co-occurrence networks from digital
+text corpora. However, the complexity and opacity of cross-border and cross-sectional elite
+relationships and the fragmented, sometimes contradictory nature of available digital infor-
+mation pose formidable obstacles to such an analysis. Cross-border and cross-layer networks
+have particularities that go beyond the domestic Russian elite networks commonly analysed
+in Russian Studies. Within the existing methodological landscape, the work of (2018) stands
+out as a pioneering example of a SNA based in co-occurrence analysis: their study offers a
+clear demonstration of how large-scale, media-based network extraction can illuminate elite
+connections in a context of institutional flux, even if their empirical scope is rather narrow
+(the wealth of Russian oligarchs) and temporally bounded (2004-5) as well as limited to
+domestic networks. Yet their research - alongside subsequent work by others - provides a
+crucial methodological foundation on which this paper’s more ambitious, outward-looking
+analysis can build.
+The approach taken by Lamberova and Sonin and our strategy for reconstructing the
+Dmitriev adaptation brokerage network both employ large-scale, text-based extraction to
+map connections among elites. Both projects begin with a curated “seed” list of relevant
+actors - in their case, drawn from the Forbes rich list and Putin’s documented inner circle;
+in ours, a hand-coded, functionally diverse group of roughly 200 entities that includes indi-
+viduals, companies, and institutions linked to Kirill Dmitriev. In our case, this seed list has
+been compiled by collecting and analysing English- and Russian-language media material,
+investigative reports, and secondary academic literature. Both Lamberova and Sonin and we
+deploy web scraping techniques and automated named entity recognition (NER) to collect
+co-occurrence data from a corpus of Russian-language media, operating on the principle that
+joint mention signifies a meaningful social or transactional tie.
+21
+
+=== PAGE 23 ===
+Despite these shared methodological starting points, there are significant divergences
+in scope, ambition, and analytical granularity. Lamberova and Sonin focus on a relatively
+narrow, well-defined population of business elites and state insiders, constructing a binary
+network - an edge is present if two actors co-occur in a news item — over a brief historical
+window (2004–5). Their filtering is rigorous, and the resulting network is paired with econo-
+metric analysis to test how connections to the Kremlin translate into business advantages,
+particularly in terms of wealth accumulation. This approach is powerful for understanding
+how elite relationships substitute for formal institutions in Russia’s transition period, but is
+limited in its ability to capture complexity beyond the immediate political-business nexus
+or adapt to multi-layered, temporal and cross-border dynamics.
+By contrast, our project builds on these foundations but aims for greater theoretical and
+empirical reach. Inspired by other methodologically innovative studies - such as Chang et
+al.’s (2023) mapping of Russian oligarchs’ offshore networks using the ICIJ leak data, and
+Zinoviev’s (2020) construction of a “kompromat” network from scandal records — we aim at
+designing a multiplex, time-evolving network that encompasses not only individuals but also
+organizations and institutions, coded for their participation in multiple, issue-specific layers:
+finance, sanctions, diplomacy, and decarbonization. This design enables us to interrogate
+not only the existence of ties but their contextual function and evolution, offering a richer
+and more granular understanding of adaptation brokerage.
+The empirical foundation of this study is a large-scale corpus of Russian-language media
+coverage derived from the INTEGRUM database, one of the most comprehensive archives
+of Russian and post-Soviet news content. Using the search query “Кирилл Дмитриев,” we
+compiled a dataset containing more than 40,000 unique articles published between 2010 and
+2025. This time span covers the entirety of Dmitriev’s public career, from his initial ap-
+pearance in elite political-economic circles to his role in the post-2022 wartime environment.
+The dataset captures reporting from a wide variety of outlets, ranging from business and
+financial media to state-affiliated and independent political news sources. As INTEGRUM
+22
+
+=== PAGE 24 ===
+aggregates content from thousands of sources across Russia and the wider post-Soviet re-
+gion, it enables a broad reconstruction of the information environment in which Dmitriev’s
+brokerage activities are documented.
+To extract potential network actors from this corpus, we applied an NER pipeline in
+Python to identify mentions of persons, organizations, and institutions. The output of
+the NER was supplemented with an occurrence score indicating the number of articles in
+which each entity appeared. In order to focus on relevant actors and reduce noise, countries
+were excluded from the NER output, and a threshold of 50 occurrences was set as the
+minimum for inclusion in the node list. This reduced the candidate list to a more manageable
+size, after which a manual cleaning process removed false positives, irrelevant names, and
+duplicates. The result was a refined set of approximately 1,000 nodes (out of 18,000 initially
+identified entities), each representing an actor connected to Dmitriev’s network through
+media-documented interactions.
+We then performed a co-occurrence analysis. Usually, co-occurrence networks are often
+reconstructed on the basis of media, legal, or even leaked sources and taken as a proxy for
+underlying social or transactional relationships. Studies like Chang et al. (2023) and Mah-
+davi (2019) demonstrate that even in opaque or authoritarian settings, elite networks can
+be mapped by triangulating public co-mentions, shared events, and indirect ties revealed
+in the digital record. This is particularly salient in Russia, where formal institutional data
+is often lacking, and where informal networks play a crucial, if concealed, role in adap-
+tation and resilience. To reconstruct Dmitriev’s network, we matched the refined node
+list with 1,000 entities against the INTEGRUM corpus to detect instances in which two
+nodes were mentioned in the same article. To capture temporal variation in the structure
+of Dmitriev’s network, the dataset was sliced into four analytically distinct periods: pre-
+Crimea (2010–2013), post-Crimea sanctions consolidation (2014–2020), the COVID period
+(2020–2022), and wartime adaptation (2022–2025). An interactive web-based platform was
+developed to allow exploratory analysis of the resulting networks. This tool enabled us to
+23
+
+=== PAGE 25 ===
+perform threshold adjustments for both node occurrences and co-occurrences, as well as vi-
+sualization of time-sliced networks through multiple layouts. It provided an environment
+for identifying emerging patterns, tracking the evolution of actor prominence, and observing
+structural changes across periods.
+24
+
+=== PAGE 26 ===
+Table 2: Louvain Community Detection: Definitions and Interpretations
+Term Mathematical Definition Substantive Interpretation
+Louvain
+MethodGreedy, multi-level maximization
+of modularity Q: reassign nodes to
+increase Q; contract communities
+into super-nodes; iterate to
+convergence.Cohesive blocs that interact more
+within than across blocs; scalable
+on large, noisy networks.
+Modularity Q=1
+2mP
+ij
+Aij−kikj
+2m
+δ(ci, cj).
+Weighted: replace Aij, ki, mby
+wij, si, w.Partition quality vs a
+degree/strength-preserving null;
+higher Qindicates more distinct
+coalitions.
+Resolution γ Q (γ) =
+1
+2mP
+ij
+Aij−γkikj
+2m
+δ(ci, cj).Controls granularity: low γ→
+broader alliances; high γ→finer
+sub-clusters.
+Community Induced subgraph with
+intra-community connectivity
+significantly exceeding the null
+expectation.Cohesive functional grouping
+(policy/finance/diplomacy) with
+dense internal ties.
+Brokers Participation coefficient
+Pi= 1−P
+c 
+ki,c/ki2(high Pi=
+multi-community ties).Intermediaries linking blocs
+(backchannels, joint ventures);
+enable cross-cluster flows.
+Temporal
+ChangeRe-estimate on time slices;
+compare partitions (adjusted
+Rand/Jaccard); track node
+reassignments.Re-alignment under shocks
+(sanctions, pandemic, war); cluster
+emergence/dissolution.
+25
+
+=== PAGE 27 ===
+From the co-occurrence networks, we computed standard network metrics, including de-
+gree centrality, betweenness centrality, and weighted edge counts, to quantify patterns of
+connectivity and brokerage. We also conducted a Louvain community detection (see Ta-
+ble 2), a widely used mathematical algorithm for identifying densely connected subgroups
+within large networks. The Louvain method partitions the network into communities by
+maximizing modularity, a measure of how well a given division captures intra-community
+cohesion relative to inter-community ties. In the context of the SOVBROKE project, this
+approach allows us to detect clusters of actors — such as state agencies, sovereign wealth
+funds, or corporate consortia — that function as semi-autonomous substructures within the
+broader adaptation brokerage network. Tracking the formation, dissolution, or reconfigura-
+tion of these communities over time provides insight into how Dmitriev’s brokerage position
+has been embedded in, and responsive to, shifting geopolitical and economic contexts.
+However, it should be noted that, due to the early stage of the overarching project,
+this paper necessarily remains at the level of media co-occurrence, which carries with it all
+the unavoidable biases of Russian-language media material. Most media outlets scandalize
+(e.g., Trump’s Ukraine diplomacy) and dramatize (e.g., the international race for a COVID
+vaccine). In addition, smaller outlets tend to adopt the reports of larger agencies. With
+regard to Russia in particular, most of the media outlets included in the study are close
+to the state, meaning that developments favourable to the Kremlin are emphasized, while
+negative ones are suppressed. All this means that - at the current stage - both the extracted
+nodes and the reconstructed edges reflect the potential network (dynamics) of Dmitriev and
+the RDIF. Through qualitative, manual, and detailed cleaning and further enrichment of
+the network data in the coming months, we will transform the reconstructed networks from
+potential to actualone.
+Nonetheless, our approach seeks to push the methodological frontier by integrating mul-
+tiplex SNA, temporal network analysis, and a broader, more functionally differentiated actor
+set. In doing so, we aim to illuminate not only how adaptation brokerage networks operate
+26
+
+=== PAGE 28 ===
+in the Russian context, but also how these methods and insights can inform the study of
+elite adaptation and resilience in other settings marked by uncertainty, fragmentation, and
+systemic change. Our project’s contribution to the literature on global political economy and
+eliteadaptationisthusunderpinnedbydigitalmethodinnovationandsubstantivecontextual
+sensitivity.
+3.3 Limitations and Further Steps
+A significant methodological challenge for the paper arises from increasing data opacity in
+the Russian context after 2022, particularly in the wake of heightened wartime secrecy and
+restricted media environments. This means that for many recent or evolving relationships,
+the available information is fragmentary, indirect, or absent altogether. Confidence scores,
+to be established in a later stage of the project, are thus especially important in flagging
+potential blind spots or weakly documented ties in the network, reminding readers that
+Russian (and especially post-2022) data carries inherent limitations. To ensure transparency
+and replicability in the construction of the network, each entry in the dataset is assigned
+both a confidence level and a unique source reference code. This practice allows subsequent
+users of the data to trace the provenance of every node and edge, evaluate the reliability of
+the evidence supporting each connection, and replicate the coding decisions. As such, while
+the network provides a robust map of potential adaptation brokerage, users should remain
+alert to the zones of higher uncertainty.
+Moreover, as much as some critical connections may be under-represented due to con-
+straintsinsourceaccessibility,anevenbiggerproblematthisexploratorystageofthenetwork
+analysis is that some connections are significantly inflated and overrepresented due to media
+biases. Further cleaning and in-depth qualitative data enrichment in the next phase of the
+project will ensure that the refined network reconstruction is closer to Dmitriev’s actual
+cross-border web of relationships.
+Further project work on Dmitriev’s network will focus on two additional network metrics:
+27
+
+=== PAGE 29 ===
+We will focus on Brokerage Density and Layer Transition Frequency (LTF) as two comple-
+mentary network metrics to capture different dimensions of adaptation brokerage. Brokerage
+Density measures the extent to which actors in an ABN occupy bridging positions between
+otherwise disconnected groups or layers. A higher Brokerage Density indicates a network in
+which intermediaries are collectively more active in translation and substitution roles. LTF,
+in turn, captures an actor’s dynamic agility across thematic layers over time. For each actor
+we record the sequence of layers in which they maintain at least one active tie at succes-
+sive time points. Actor with higher LTF scores are more strategically flexible — quickly
+re-routing ties between finance, sanctions, diplomacy, and climate — than actors with lower
+scores. Conversely, a low transition rate indicates greater stability or rigidity, suggesting the
+actor remains consistently embedded in the same thematic layer. This measurement allows
+to quantify the adaptability of actors within the ABN and compare how different actors
+respond to structural changes such as sanctions, trade barriers, or shifts in global regulatory
+environments. Together, these measures reveal not only who the key brokers are, but also
+how and when they rewire ties across domains, providing a dynamic map of Russia’s evolving
+adaptation networks under conditions of geopolitical stress.
+4 The Kirill Dmitriev Network: Preliminary Evidence
+This section presents preliminary evidence on the actors, structures, and evolution of cross-
+border networks associated with Kirill Dmitriev, the head of the Russian Direct Investment
+Fund (RDIF), from 2010 to 2025. The first sub-section summarises the network’s general
+characteristics and evolutionary patterns, visualising mathematically distinguishable clusters
+and their changes over time derived from a Louvain community detection algorithm. Lou-
+vain communities reflect cohesive sub-networks of actors whose internal density and external
+bridging functions indicate distinct strategic blocs within Dmitriev’s brokerage network (see
+also Table 2). The sub-section also discusses the most important emerging actors throughout
+28
+
+=== PAGE 30 ===
+the period under scrutiny. While the network adapts markedly in response to major geopolit-
+ical and economic shocks — shifting its international orientation, reconfiguring key brokerage
+positions, and absorbing new actors — certain structural features remain strikingly stable.
+Core domestic hubs around the RDIF and select state-linked financial institutions persist
+across all time periods, anchoring the network even as its peripheries expand, contract, or
+reorient. This combination of adaptive flexibility and institutional continuity is central to
+understanding Dmitriev’s enduring role as a patronal broker in Russia’s political economy.
+The second sub-section focuses on the period from 2010 to 2013, during which the RDIF
+established itself as a key institution in Russia’s political economy and Dmitriev began
+his ’second career’ as a globally connected broker serving Russian state power. The data
+presented is indicative of Dmitriev’s and the RDIF’s relatively diverse network at the time,
+with links to European and Asian financial and developmental actors, as well as close ties
+with some of Russia’s most important domestic economic actors.
+The third sub-section focuses on the years following Russia’s annexation of the Ukrainian
+peninsula of Crimea. From 2014 to 2020, following the introduction of modest Western
+sanctions, the RDIF began to diversify its relationships while strengthening its ties with
+Russia’s domestic economy. Relations with European actors were replaced by more active
+engagement with BRICS, Gulf, Saudi, Chinese and US actors. This indicates that, even
+at this early stage, the Russian state’s strategy for weathering sanctions included proactive
+global diversification, which could later be built upon in the face of even greater geopolitical
+pressure.
+The fourth sub-section examines Dmitriev’s and the RDIF’s network evolution during the
+global COVID-19 pandemic from 2020 to 2022. The preliminary findings clearly illustrate
+what can be termed the broker-mediated institutional repurposing of the RDIF as a vehicle
+for health crisis diplomacy. Not only were Dmitriev and the RDIF involved in financing and
+facilitating the development of Russia’s Sputnik V anti-COVID vaccine domestically, they
+were also actively promoting the export of the novel drug internationally. Furthermore, the
+29
+
+=== PAGE 31 ===
+data indicates that, during this period, Dmitriev was repurposed as a close Putin associate
+to establish an initial diplomatic backchannel with the Trump I administration.
+The fifth sub-section presents insights into changes to Dmitriev’s and the RDIF’s net-
+works since Russia’s full-scale military invasion of Ukraine. From 2022 to 2025, the network
+underwent another repurposing. With unprecedented sanctions imposed by Western states
+and increasing isolation from Western networks, the RDIF undertook a dual shift. Economi-
+cally, itsnetworksbecamemoredomestic, firmlyconsolidatingtheinstitutionwithinRussia’s
+war-adaptation economy. Internationally, the RDIF — and Dmitriev in particular — shifted
+its focus away from attracting foreign investment to Russia, instead reinventing itself as a
+diplomatic hub for special missions. These include facilitating negotiations between Trump
+and Putin over Ukraine and arranging highly personalised, large-scale business deals with
+non-Western actors.
+Each of the following sub-sections is supported by a set of complementary empirical
+outputs designed to visualise and quantify network change over time. Time-sliced network
+graphs for each period provide an intuitive overview of the structural evolution of Dmitriev’s
+connections, while associated network metrics and centrality rankings highlight shifts in
+the prominence and brokerage roles of individual actors. In addition, community structure
+visualisationsderivedfromtheLouvainalgorithmrevealcohesiveclusterswithinthenetwork,
+allowing us to trace how strategic sub-groups emerge, dissolve, or reconfigure in response to
+external shocks. Taken together, these outputs serve to ground the narrative interpretation
+in observable structural patterns, linking changes in the network’s composition and topology
+to the adaptive strategies identified in the analysis.
+4.1 General Patterns
+Across the 2010–2025 period, the Dmitriev network displays both remarkable adaptability
+and a persistent underlying architecture. This sub-section takes a panoramic view of the
+network’s evolution, identifying the central actors, mapping shifts in their relative impor-
+30
+
+=== PAGE 32 ===
+tance, and highlighting the emergence and decline of distinct clusters over time. The analysis
+draws on time-sliced network graphs, centrality metrics, and community detection outputs
+to illustrate how changes in geopolitical and economic conditions — from Crimea to COVID
+to full-scale war — reconfigure the network’s periphery, while its core remains anchored by
+enduring domestic institutions and long-standing partnerships.
+The four stylised network graphs presented in the Figures 1, 2, 3 and 4 depict the top 50
+actors in the Dmitriev network across four distinct periods: pre-Crimea (2010–2013), post-
+Crimea (2014–2020), COVID (2020–2022), and war (2022–2025). Each node is colour-coded
+to indicate the period in which it first entered the top 50, allowing to track both continuity
+and change over time. The networks are drawn from a time-sliced co-occurrence analysis of
+Russian-language media articles mentioning Dmitriev, based on over 40,000 unique articles
+from the INTEGRUM database (see section 3). Presenting the results in this visual form
+servesadualpurpose: ithighlightsthestructuralstabilityofthenetwork’scorewhilemaking
+visible the influx and disappearance of actors in response to external shocks. By avoiding
+exhaustive labelling or excessive statistical annotation, the visuals aim to give an intuitive
+sense of network composition, density, and the shifting role of new entrants over time.
+Taken together, the four visuals reveal a network that adapts selectively in response to
+geopolitical and economic shocks while retaining a stable core of highly centralised actors.
+In the pre-Crimea period, the network is relatively balanced between domestic political-
+economic actors and international partners. Following the annexation of Crimea in 2014,
+the post-Crimea graph shows the loss of some Western-linked institutions and the introduc-
+tion of new ties to BRICS and non-Western actors. The COVID period marks a thematic
+repurposing of the network, incorporating public health agencies and pandemic-related in-
+stitutions while keeping core economic and political nodes intact. The war period graph
+shows the most dramatic transformation, with Western actors largely absent, a denser do-
+mestic clustering, and the emergence of war-specific brokers. Across all periods, the RDIF,
+Putin, and a small circle of state-linked firms retain their central position, underscoring the
+31
+
+=== PAGE 33 ===
+network’s resilience.
+In the pre-Crimea period (Figure 1), the network is characterised by a relatively even
+distribution of domestic and international actors, reflecting Dmitriev’s role in positioning the
+RDIF as a globally connected sovereign investment fund. Prominent nodes include major
+Russianstate-ownedenterprises(e.g.,Sberbank,Gazprombank,VTB),high-rankingpolitical
+figures (e.g., Putin, Shuvalov, Ulyukaev), and international financial organisations such as
+the IMF, the European Bank for Reconstruction and Development (EBRD), and Goldman
+Sachs. The structure suggests a dual orientation: securing domestic political backing while
+cultivatingstronglinkswithglobalcapitalmarketsandmultilateraldevelopmentinstitutions.
+ThisbalanceforeshadowstheRDIF’sinitialoperationalstrategyasabridgebetweenRussian
+state power and international finance.
+32
+
+=== PAGE 34 ===
+Figure 1: Top 50 actors of the Dmitriev network, pre-Crimea period
+33
+
+=== PAGE 35 ===
+The post-Crimea network (Figure 2) reflects a clear reorientation in response to Western
+sanctions and deteriorating relations with Europe and the United States. Several Western
+actors from the Pre-Crimea graph are absent, replaced by new connections to Gulf, Chinese,
+and BRICS-affiliated institutions. The appearance of Trump as a node indicates the cultiva-
+tion of personalised political links in the United States, while increased visibility of entities
+such as the Asian-Pacific Economic Cooperation (APEC) and ALROSA underscores a pivot
+toward resource diplomacy and alternative investment partners. Despite these changes, core
+Russian political-economic institutions, including VEB and the Ministry of Finance, remain
+centralpartnersfortheRDIF,suggestingcontinuityinthedomesticbackboneofthenetwork.
+The COVID-period network (Figure 3) illustrates a thematic repurposing of Dmitriev’s
+brokerage role, with the RDIF at the centre of a pandemic-oriented diplomatic and com-
+mercial agenda. New nodes such as the Gamaleya Research Institute, R-Pharm, and the
+Ministry of Health reflect the institutional infrastructure mobilised for the Sputnik V vac-
+cine project. The presence of international political figures like Joe Biden and the European
+Commission highlights the RDIF’s attempts to use vaccine diplomacy as a soft-power tool,
+even amid worsening geopolitical tensions. At the same time, enduring domestic power
+nodes—Putin, the Federation Council, Sberbank—anchor the network, ensuring that health
+diplomacy operates in conjunction with long-standing political-economic priorities.
+34
+
+=== PAGE 36 ===
+Figure 2: Top 50 actors of the Dmitriev network, post-Crimea period
+35
+
+=== PAGE 37 ===
+Figure 3: Top 50 actors of the Dmitriev network, COVID period
+36
+
+=== PAGE 38 ===
+Figure 4: Top 50 actors of the Dmitriev network, war period
+37
+
+=== PAGE 39 ===
+Finally, the war period graph (Figure 4) depicts the most pronounced restructuring of the
+network, shaped by unprecedented Western sanctions and Russia’s growing isolation from
+the global financial system. Almost all previously included Western institutional actors
+are absent, replaced by a more insular constellation of domestic political, economic, and
+security-linked entities. The network becomes denser, with stronger interconnections among
+remainingactors, reflectingaconsolidationofeliteresourcesinsupportofthewaradaptation
+economy. Internationally, the surviving foreign connections are concentrated in non-Western
+partners such as BRICS members, OPEC+, and high-level diplomatic intermediaries. The
+RDIF’s role appears to shift away from investment attraction toward functioning as a high-
+level diplomatic and economic broker, engaging in “special missions” that blend political
+negotiation with large-scale non-Western business deals.
+The visual patterns observed in the four time-sliced network graphs provide an intuitive
+foundation for the Louvain community detection and centrality metrics introduced later
+in this section. At the same time, the colour-coded entry points of nodes across periods
+already hint at the structural segmentation that the Louvain algorithm formally identifies -
+grouping actors into communities based on their density of interconnections relative to the
+network as a whole. In practice, these communities correspond to functional or geopolitical
+sub-networks.
+38
+
+=== PAGE 40 ===
+Figure 5: Stylized top actors Louvain community, pre-Crimea period
+39
+
+=== PAGE 41 ===
+Figure 6: Stylized top actors Louvain community, post-Crimea period
+40
+
+=== PAGE 42 ===
+Figure 7: Stylized top actors Louvain community, COVID period
+41
+
+=== PAGE 43 ===
+Figure 8: Stylized top actors Louvain community, war period
+42
+
+=== PAGE 44 ===
+Table 3 lists the 20 most central actors in the Dmitriev network for the entire 2010–2025
+period, ranked by a composite score that integrates centrality metrics alongside frequency of
+occurrence and total edge count. Logically, given the co-occurrence-based network construc-
+tion around Dmitriev, the list is headed by the RDIF, which occupies a dominant position
+acrossallcentralitymeasuresandfarexceedsallothersinoccurrenceandedgecount. There-
+maining top actors include senior political leaders (e.g., Vladimir Putin, Dmitry Medvedev),
+major state-owned enterprises and financial institutions (e.g., Vnesheconombank, Sberbank,
+Gazprom, Rosneft), key state bodies (e.g., the Federation Council, Ministry of Finance), and
+selected international figures and institutions (e.g., Donald Trump, the UN General Assem-
+bly, BRICS). Each entry shows a different profile across the centrality metrics — some actors
+combine high degree and closeness scores with low betweenness, while others rank highly for
+brokerage roles despite fewer direct ties.
+The ranking underscores the extent to which the Dmitriev network is embedded in Rus-
+sia’s state–capital nexus, with the RDIF as a critical hub linking government leadership,
+state-owned corporations, and international interlocutors. The mix of domestic political au-
+thorities, economic institutions, and selected global actors illustrates the dual anchoring of
+the network: it is deeply rooted in the structures of Russia’s state-permeated extractivist
+political economy while maintaining targeted external linkages that support its adaptive ca-
+pacity. The presence of figures like Donald Trump and platforms such as the UN General
+Assembly and BRICS highlights the strategic brokerage role of Dmitriev’s network in lever-
+aging high-profile international relationships for political and economic purposes. These
+findings lend empirical weight to the paper’s argument that ABNs are shaped by both
+structural continuity in core domestic relationships and selective, event-driven international
+engagements that expand or contract in response to geopolitical shocks.
+Figure 11 shows scatter-plots of monthly occurrence frequencies for the ten most central
+actors in the Dmitriev network across the four analysed periods: pre-Crimea (blue), post-
+Crimea (green), COVID (orange), and the war period (red). The plots reveal variation in
+43
+
+=== PAGE 45 ===
+Table 3: Top 20 Actors by Composite Score – All Periods Combined
+Rank Actor Composite Degree Closeness Occurrences Edge Count
+1 Российский фонд прямых
+инвестиций (РФПИ)0.8244 1 .0000 73 .1250 36428 233136
+2 Владимир Путин 0.4485 0 .9875 72 .4530 8764 98985
+3 Кирилл Дмитриев 0.4254 0 .9770 72 .4335 8498 53316
+4 Внешэкономбанк (ВЭБ) 0.4127 0 .9080 71 .6794 3473 59517
+5 Сбербанк 0.4084 0 .9358 70 .8172 2672 58382
+6 Совет Федерации 0.4043 0 .8744 70 .0068 1680 52740
+7 ОАО «РЖД» 0.4030 0 .9022 70 .7451 2226 52127
+8 Дмитрий Медведев 0.4003 0 .9271 70 .6935 2288 47732
+9 Министерство финансов 0.3967 0 .9032 70 .4424 2077 52537
+10 Московская биржа 0.3956 0 .8763 70 .7011 2189 43341
+11 Банк ВТБ 0.3898 0 .8926 70 .2834 1964 42727
+12 ОАО «Газпром» 0.3887 0 .8917 69 .6051 1569 45904
+13 ОАО «Ростелеком» 0.3875 0 .8715 69 .4450 2069 30166
+14 Роснефть 0.3858 0 .8677 70 .0504 1747 40189
+15 Федеральная антимонопольная
+служба (ФАС)0.3857 0 .8821 69 .1998 1475 38229
+16 Дональд Трамп 0.3856 0 .8245 71 .7935 4872 41822
+17 Сергей Лавров 0.3789 0 .8217 71 .0520 2683 42944
+18 Генеральная Ассамблея ООН 0.3765 0 .8428 69 .3504 1457 36903
+19 Дмитрий Песков 0.3745 0 .8418 70 .5089 2419 28690
+20 БРИКС 0.3728 0 .8552 69 .9301 1699 23467
+salience over time, with the RDIF, Dmitriev, and Putin consistently visible, while actors
+like Donald Trump, Steven Witkoff, or the Gamaleya Institute show more episodic promi-
+nence, depending on the purpose the state attached to the RDIF in the respective period.
+Trend lines are added to each panel, highlighting whether mentions increase or decline across
+periods.
+Figure 10 applies the same method to a different set of twelve selected actors. Here,
+attention is given to institutions like Vnesheconombank, Sberbank, Gazprom, the China In-
+vestment Corporation, and the European Bank for Reconstruction and Development, along-
+side figures such as Sergey Chemezov. These plots underscore the differing trajectories of
+domestic versus foreign actors: Russian institutions exhibit recurrent mentions across peri-
+ods, while international actors often show steep declines or sudden absences coinciding with
+geopolitical shifts.
+Figure 9 traces the evolution of composite centrality scores for the ten most significant
+actors across the four periods. It highlights continuity of figures such as Putin, Dmitriev,
+44
+
+=== PAGE 46 ===
+and Lavrov, alongside newcomers or episodic actors like the Gamaleya Institute during the
+pandemic and U.S. politicians (e.g., Rubio, Trump) during conflict-driven phases. The tra-
+jectories show both stable core actors and fluctuating prominence depending on shocks and
+crises.
+Individually, the visuals illustrate different facets of network adaptation. The first two
+sets of occurrence frequency regressions emphasize how media salience shifts with global and
+domestic events. RDIF and Dmitriev remain consistently embedded in coverage, signaling
+the institutionalization of their role as brokers of global engagement, even as surrounding
+actors shift. By contrast, the steep rise and fall of entities like the Gamaleya Institute
+during the COVID period reflects event-driven spikes that leave little long-term imprint.
+Foreign actors such as Trump or the EBRD show a different pattern: salience is tied not
+only to events but to Russia’s shifting international alignments, highlighting the fragility of
+transnational brokerage under sanctions and conflict.
+The composite score evolution complements these observations by synthesizing structural
+importance into a comparative trajectory. It shows that while actors like Putin, Dmitriev,
+and RDIF maintain their centrality across shocks, others — such as Vnesheconombank or
+Gazprom — gradually lose significance, displaced by figures or institutions linked to the
+emerging contexts of health diplomacy (COVID) or wartime alliances (2022 onwards). In-
+terestingly, the chart also reveals that some international figures (e.g., Trump) achieve cen-
+trality despite — or perhaps because of — political antagonism, underscoring how adversarial
+actors can still structure Russia’s adaptation networks.
+Takentogether, thevisualscapturebothresilienceandplasticityintheDmitrievnetwork.
+The resilience lies in the enduring prominence of a core broker set (Putin, Dmitriev, RDIF),
+while the plasticity is reflected in how peripheral and international nodes enter and exit with
+global shocks. Comparing across the visuals, one can see that occurrence frequency alone
+does not determine long-term centrality: actors like the Gamaleya Institute spiked during
+COVID but dropped sharply afterwards, whereas Dmitriev’s more modest but consistent
+45
+
+=== PAGE 47 ===
+salience translates into stable composite centrality. This juxtaposition makes clear that the
+brokerage network adapts dynamically but also preserves a core of institutionalized actors,
+aligning well with the argument about Russia’s strategies of adaptive global engagement.
+46
+
+=== PAGE 48 ===
+Figure 9: Composite score evolution for the Top 10 network actors
+47
+
+=== PAGE 49 ===
+Figure 10: Regression graphs for 12 selected actors
+48
+
+=== PAGE 50 ===
+Figure 11: Regression graphs for Top 10 actors
+49

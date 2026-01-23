@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs,longtable,array,geometry,caption,siunitx}
+\geometry{margin=1in}
+\captionsetup{labelfont=bf}
+\title{Network Analysis: Top 20 Actors -- COVID Period}
+\author{Automated SNA Report}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Methodology}
+A composite score $0.4\,\text{Degree}+0.3\,\text{Closeness}+0.2\,\text{Norm.\ Occurrences}+0.1\,\text{Edge Count}$ ranks entities. RDIF and Dmitriev entities are excluded from rankings.
+\section{Results}
+\begin{table}[htbp]
+\centering
+\caption{Top 20 actors by composite score -- COVID Period}
+\label{tab:top20}
+\begin{tabular}{r l S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] r r}
+\toprule
+Rank & Actor & {Composite} & {Degree} & {Closeness} & Occurrences & {Edge Count}\\
+\midrule
+1 & Владимир Путин & 0.6451 & 0.7726 & 0.2157 & 12164432 & 14695 \\
+2 & Всемирная организация здравоохранения (ВОЗ) & 0.6017 & 0.6612 & 0.2183 & 6452334 & 16633 \\
+3 & Михаил Мишустин & 0.5831 & 0.6659 & 0.2123 & 653920 & 11653 \\
+4 & Сбербанк & 0.5826 & 0.6495 & 0.2212 & 1619232 & 9277 \\
+5 & Национальный исследовательский центр эпидемиологии и микробиологии имени Н.Ф. Гамалеи (НИЦЭМ) & 0.5486 & 0.5041 & 0.2210 & 16447040 & 20219 \\
+6 & Банк ВТБ & 0.5432 & 0.5768 & 0.2216 & 392800 & 5607 \\
+7 & Министерство финансов & 0.5430 & 0.5651 & 0.2244 & 625177 & 6195 \\
+8 & Дональд Трамп & 0.5406 & 0.5674 & 0.2198 & 2104704 & 7080 \\
+9 & Михаил Мурашко & 0.5271 & 0.5053 & 0.2278 & 1348219 & 8808 \\
+10 & Совет Федерации & 0.5220 & 0.5404 & 0.2159 & 438480 & 6469 \\
+11 & Яндекс & 0.5199 & 0.5006 & 0.2318 & 200028 & 4215 \\
+12 & Федеральная антимонопольная служба (ФАС) & 0.5190 & 0.5217 & 0.2222 & 256650 & 5221 \\
+13 & Генеральная Ассамблея ООН & 0.5189 & 0.5275 & 0.2190 & 582800 & 5776 \\
+14 & ОАО «РЖД» & 0.5125 & 0.4865 & 0.2292 & 460782 & 5113 \\
+15 & Роспотребнадзор & 0.5067 & 0.4736 & 0.2280 & 505305 & 5727 \\
+16 & Дмитрий Песков & 0.5058 & 0.4795 & 0.2267 & 1168377 & 4757 \\
+17 & Сергей Собянин & 0.4984 & 0.4701 & 0.2243 & 185648 & 4793 \\
+18 & Дмитрий Медведев & 0.4962 & 0.4478 & 0.2327 & 288288 & 3314 \\
+19 & Совет национальной безопасности (СНБ) & 0.4950 & 0.4689 & 0.2227 & 92224 & 4417 \\
+20 & МВД & 0.4924 & 0.4666 & 0.2221 & 89426 & 4038 \\\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

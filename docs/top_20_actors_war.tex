@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs,longtable,array,geometry,caption,siunitx}
+\geometry{margin=1in}
+\captionsetup{labelfont=bf}
+\title{Network Analysis: Top 20 Actors -- War Period}
+\author{Automated SNA Report}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Methodology}
+A composite score $0.4\,\text{Degree}+0.3\,\text{Closeness}+0.2\,\text{Norm.\ Occurrences}+0.1\,\text{Edge Count}$ ranks entities. RDIF and Dmitriev entities are excluded from rankings.
+\section{Results}
+\begin{table}[htbp]
+\centering
+\caption{Top 20 actors by composite score -- War Period}
+\label{tab:top20}
+\begin{tabular}{r l S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] r r}
+\toprule
+Rank & Actor & {Composite} & {Degree} & {Closeness} & Occurrences & {Edge Count}\\
+\midrule
+1 & Владимир Путин & 0.6429 & 0.6800 & 0.1946 & 22129100 & 22949 \\
+2 & Дональд Трамп & 0.5971 & 0.5523 & 0.2075 & 14757288 & 23007 \\
+3 & Владимир Зеленский & 0.5589 & 0.5135 & 0.2033 & 3155745 & 19735 \\
+4 & Стивен Уиткофф & 0.5412 & 0.4232 & 0.2065 & 12023495 & 25480 \\
+5 & Дмитрий Песков & 0.5180 & 0.4426 & 0.2150 & 2646386 & 10472 \\
+6 & Сергей Лавров & 0.5146 & 0.4426 & 0.1975 & 4703299 & 17901 \\
+7 & Сбербанк & 0.5088 & 0.5019 & 0.1978 & 643952 & 5575 \\
+8 & Министерство финансов & 0.5029 & 0.4645 & 0.2070 & 614792 & 5194 \\
+9 & Банк ВТБ & 0.5023 & 0.4503 & 0.2122 & 434044 & 4838 \\
+10 & ОАО «Газпром» & 0.4978 & 0.4297 & 0.2181 & 327921 & 3777 \\
+11 & Юрий Ушаков & 0.4910 & 0.3755 & 0.2021 & 5121300 & 18282 \\
+12 & БРИКС & 0.4839 & 0.4297 & 0.2069 & 798530 & 4050 \\
+13 & Генеральная Ассамблея ООН & 0.4823 & 0.4155 & 0.2089 & 482267 & 5041 \\
+14 & Совет Федерации & 0.4785 & 0.4181 & 0.2059 & 413280 & 4607 \\
+15 & Джо Байден & 0.4784 & 0.3987 & 0.2105 & 570570 & 5652 \\
+16 & ОАО «РЖД» & 0.4772 & 0.4065 & 0.2102 & 380646 & 3947 \\
+17 & МВД & 0.4768 & 0.3987 & 0.2153 & 68902 & 2631 \\
+18 & Марко Рубио & 0.4737 & 0.3265 & 0.2070 & 3976618 & 18008 \\
+19 & Михаил Мишустин & 0.4691 & 0.4194 & 0.1991 & 214720 & 4276 \\
+20 & Росатом & 0.4687 & 0.3794 & 0.2119 & 198609 & 4674 \\\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

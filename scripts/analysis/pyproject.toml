@@ -1,0 +1,15 @@
+[project]
+name = "scrapetestsna"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.6",
+    "networkx>=3.5",
+    "numpy>=2.3.3",
+    "pandas>=2.3.3",
+    "plotly>=6.3.1",
+    "scipy>=1.16.2",
+    "seaborn>=0.13.2",
+    "wordcloud>=1.9.4",
+]

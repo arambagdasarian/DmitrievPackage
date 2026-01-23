@@ -1,60 +1,45 @@
-Dmitriev Network Mapping Project
-This repository contains the codebase and ongoing development work for a complex data science research initiative on the social, political, and financial networks surrounding Kirill Dmitriev, the head of Russia’s sovereign wealth fund. The project is being conducted under the auspices of the Centre for East European and International Studies (ZOiS), where I serve as a Data Science Research Assistant. I am also the Principal Investigator on the forthcoming publication, authored by Dr. Sebastian Hoppe, expected for release in Winter 2025.
+# ScrapeTestSNA - Project Organization
 
-Project Overview
-This project uses graph-theoretic techniques, fuzzy data cleaning, named entity recognition (NER), and large-scale web scraping to map the multilevel affiliations, influence pathways, and structural patterns of the elite networks in which Dmitriev operates. The goal is to understand the architecture of post-Soviet elite brokerage, particularly within the context of Russian state capitalism and international finance.
+This repository has been organized into a clear directory structure for better maintainability.
 
-The research builds on and contributes to social network analysis (SNA) literature through its use of custom-built tools to extract and clean entity-level data from Russian-language media sources, using proprietary datasets such as Integrum, along with public financial disclosures, organizational rosters, and legal documents.
+## Directory Structure
 
-Key Features
-1. Fuzzy Matching and Entity Cleaning
-Implements Levenshtein-based and embedding-based fuzzy matching algorithms to reconcile variations in names and organizational titles across thousands of entries.
+### `data/`
+All datasets and data files are organized here:
+- **`data/periods/`** - Time-period specific datasets (pre_crimea.csv, post_crimea.csv, covid.csv, war.csv, final_nodes.csv)
+- **`data/processed/`** - Processed and cleaned datasets (CSV, XLSX, JSON files)
+- **`data/raw/`** - Raw Excel files and original data sources
 
-Standardizes transliterated Russian names and resolves ambiguities across datasets.
+### `scripts/`
+All Python scripts organized by function:
+- **`scripts/analysis/`** - Network analysis, clustering, and ML scripts
+- **`scripts/data_processing/`** - Data cleaning, merging, NER processing scripts
+- **`scripts/visualization/`** - Scripts for generating visualizations
+- **`scripts/scraping/`** - Web scraping scripts and related tools
+- **`scripts/old_technique/`** - Legacy scripts from previous approaches
 
-Deduplicates named entities across time periods using both statistical and linguistic heuristics.
+### `outputs/`
+All generated outputs:
+- **`outputs/html/`** - Interactive HTML visualizations and dashboards
+- **`outputs/visualizations/`** - PNG, PDF visualizations and related CSV data
+- **`outputs/assets/`** - Image assets used in visualizations
 
-2. Named Entity Recognition and Labeling
-Applies rule-based and model-based NER techniques to extract persons, organizations, and geo-political entities.
+### `docs/`
+Documentation, papers, and reports:
+- Markdown documentation files
+- PDF papers and reports
+- LaTeX files for academic writing
+- Text files with extracted content
 
-Custom post-processing pipeline developed to resolve co-reference issues and identify aliases and abbreviations in Russian-language contexts.
+## Notes
 
-3. Web Scraping & Source Aggregation
-Automated scraping modules gather data from Integrum, Kommersant, RBC, and other relevant Russian news sources.
+- **All datasets have been preserved** - no data files were deleted during organization
+- Only system files (.DS_Store) and temporary log files were removed
+- The `deliverables/` directory structure has been integrated into the main organization
 
-Dynamic content handling (e.g., JavaScript-rendered sites) is facilitated via Selenium-based scraping, with rate-limiting and session rotation to avoid blocking.
+## Quick Access
 
-4. Graph Construction & Theoretical Modeling
-Graphs are constructed over defined temporal windows to capture network evolution.
-
-Employs:
-- Degree centrality, betweenness, and eigenvector centrality
-- K-core decomposition
-- Community detection algorithms (Louvain, Leiden)
-- Brokerage metrics, including constraint scores and layer transition frequencies
-- Nodes and edges are weighted based on frequency, type of interaction, and co-occurrence strength.
-
-5. 3D Visualization (In Progress)
-Interactive 3D network visualizations are being developed using Plotly and Three.js for web deployment.
-- Visualization modules are tailored to:
-- Highlight role-based distinctions (e.g., political vs. financial actors)
-- Animate network growth across time slices
-- Export embeddable and shareable visual content for academic publication
-
-Status
-This project is currently in the advanced development and validation stage. A full paper, authored by Dr. Sebastian Hoppe (with myself as PI), is slated for submission in Winter 2025. Code components are continually updated as data pipelines are refined and additional graph metrics are introduced.
-
-Requirements
-Python 3.7+
-pandas, numpy
-scikit-learn
-fuzzywuzzy
-spaCy (with Russian models)
-networkx
-plotly
-selenium
-beautifulsoup4
-
-
-Citation
-Pending publication of the paper, please contact abagdasarian@college.harvard.edu or sebastian.hoppe@zois-berlin.de for questions or pre-publication collaboration
+- **Main datasets**: `data/periods/` and `data/processed/`
+- **Analysis scripts**: `scripts/analysis/`
+- **Visualizations**: `outputs/visualizations/`
+- **Interactive dashboards**: `outputs/html/`

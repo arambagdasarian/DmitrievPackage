@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs,longtable,array,geometry,caption,siunitx}
+\geometry{margin=1in}
+\captionsetup{labelfont=bf}
+\title{Network Analysis: Top 20 Actors -- Post-Crimea Period}
+\author{Automated SNA Report}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Methodology}
+A composite score $0.4\,\text{Degree}+0.3\,\text{Closeness}+0.2\,\text{Norm.\ Occurrences}+0.1\,\text{Edge Count}$ ranks entities. RDIF and Dmitriev entities are excluded from rankings.
+\section{Results}
+\begin{table}[htbp]
+\centering
+\caption{Top 20 actors by composite score -- Post-Crimea Period}
+\label{tab:top20}
+\begin{tabular}{r l S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] r r}
+\toprule
+Rank & Actor & {Composite} & {Degree} & {Closeness} & Occurrences & {Edge Count}\\
+\midrule
+1 & Владимир Путин & 0.6613 & 0.8953 & 0.2025 & 30560068 & 47836 \\
+2 & Дмитрий Медведев & 0.6268 & 0.8255 & 0.2182 & 2951520 & 29043 \\
+3 & Внешэкономбанк (ВЭБ) & 0.6214 & 0.7977 & 0.2205 & 5813802 & 31562 \\
+4 & ОАО «РЖД» & 0.6168 & 0.8008 & 0.2168 & 2969484 & 30970 \\
+5 & Сбербанк & 0.6157 & 0.8039 & 0.2152 & 3321296 & 30307 \\
+6 & ОАО «Газпром» & 0.6084 & 0.7895 & 0.2151 & 1438773 & 29479 \\
+7 & Роснефть & 0.5975 & 0.7567 & 0.2171 & 2243148 & 29316 \\
+8 & Федеральная антимонопольная служба (ФАС) & 0.5955 & 0.7382 & 0.2257 & 1416000 & 24063 \\
+9 & Министерство финансов & 0.5951 & 0.7546 & 0.2165 & 2018844 & 28488 \\
+10 & Банк ВТБ & 0.5895 & 0.7331 & 0.2225 & 2127012 & 23759 \\
+11 & Московская биржа & 0.5791 & 0.7166 & 0.2188 & 2094873 & 24641 \\
+12 & Совет Федерации & 0.5771 & 0.7136 & 0.2137 & 1344000 & 30973 \\
+13 & ОАО «Ростелеком» & 0.5731 & 0.6940 & 0.2258 & 1969688 & 18822 \\
+14 & ПАО «МТС» & 0.5622 & 0.6704 & 0.2268 & 2585664 & 15802 \\
+15 & Аркадий Дворкович & 0.5532 & 0.6407 & 0.2283 & 923510 & 17756 \\
+16 & Александр Новак & 0.5521 & 0.6386 & 0.2283 & 1514022 & 17382 \\
+17 & Генеральная Ассамблея ООН & 0.5518 & 0.6602 & 0.2191 & 775124 & 19890 \\
+18 & ОАО «ЛУКОЙЛ» & 0.5507 & 0.6386 & 0.2285 & 430440 & 15822 \\
+19 & МВД & 0.5496 & 0.6540 & 0.2211 & 227963 & 17641 \\
+20 & Банк России & 0.5487 & 0.6653 & 0.2172 & 494792 & 16727 \\\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

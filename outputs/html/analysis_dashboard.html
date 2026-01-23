@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dmitriev Network Analysis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 14px;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .section-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .section-desc {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .card-desc {
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .card-type {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            font-size: 11px;
+            color: #667eea;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-type.static {
+            background: rgba(237, 100, 166, 0.2);
+            color: #ed64a6;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 60px 0;
+        }
+        
+        .summary-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .summary-list {
+            list-style: none;
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .summary-list li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .summary-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Dmitriev Network Analysis Dashboard</h1>
+            <p class="subtitle">Comprehensive Attribute Analysis (2010-2025)</p>
+            <p class="description">
+                Exploring institutional repurposing and actor evolution through sector, state/private classification,
+                actor types, and jurisdictional analysis across four critical periods: Pre-Crimea, Post-Crimea, COVID, and War.
+            </p>
+        </header>
+        
+        <div class="summary-box">
+            <div class="summary-title">📋 Analysis Overview</div>
+            <ul class="summary-list">
+                <li>150 entities with 10,334 connections across 4 time periods</li>
+                <li>Four key attributes: Sector, State/Private, Actor Type, Jurisdiction</li>
+                <li>Interactive visualizations + static PNG exports</li>
+                <li>Louvain community detection and attribute-based clustering</li>
+                <li>Top 50 vs overall network comparative analysis</li>
+            </ul>
+        </div>
+        
+        <!-- ANALYSIS 1 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div class="section-title">Composition Changes Over Time</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> How does the composition of each attribute change over the four periods?<br>
+                Examine the evolution of sectors, state/private actors, actor types, and jurisdictions across Pre-Crimea, Post-Crimea, COVID, and War periods.
+            </p>
+            <div class="cards">
+                <a href="interactive_visuals/1_period_composition.html" class="card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Interactive Period Composition</div>
+                    <div class="card-desc">
+                        Dynamic pie charts and evolution graphs for all four attributes. Toggle between entity count and mention-weighted views.
+                    </div>
+                    <span class="card-type">Interactive</span>
+                </a>
+                
+                <a href="visuals/1_composition_pie_sector.png" class="card">
+                    <div class="card-icon">🥧</div>
+                    <div class="card-title">Sector Pie Charts</div>
+                    <div class="card-desc">
+                        Four-period breakdown showing Finance, Government, Health, Diplomacy, and other sector distributions.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/1_evolution_line_sector.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Sector Evolution Graph</div>
+                    <div class="card-desc">
+                        Line chart tracking sector composition changes from Pre-Crimea through War period.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/1_composition_pie_state_private.png" class="card">
+                    <div class="card-icon">🥧</div>
+                    <div class="card-title">State/Private Pie Charts</div>
+                    <div class="card-desc">
+                        Period-by-period breakdown of state versus private actor participation.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/1_evolution_line_state_private.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">State/Private Evolution</div>
+                    <div class="card-desc">
+                        Tracking the balance between state and private actors over time.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/1_evolution_line_actor_type.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Actor Type Evolution</div>
+                    <div class="card-desc">
+                        Evolution of individuals, institutions, funds, companies across periods.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- ANALYSIS 2 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div class="section-title">Top 50 vs Overall Network</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> How do these compositions differ between the top 50 actors of each period compared to the overall network?<br>
+                Comparative analysis revealing whether network elites have different attribute distributions than the broader network.
+            </p>
+            <div class="cards">
+                <a href="interactive_visuals/2_top50_comparison.html" class="card">
+                    <div class="card-icon">⚖️</div>
+                    <div class="card-title">Interactive Top 50 Comparison</div>
+                    <div class="card-desc">
+                        Side-by-side comparison of attribute distributions. Select period and attribute to see differences between elite and overall network.
+                    </div>
+                    <span class="card-type">Interactive</span>
+                </a>
+                
+                <a href="visuals/2_top50_comparison_Pre-Crimea.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Pre-Crimea Comparison</div>
+                    <div class="card-desc">
+                        All four attributes compared: overall network vs top 50 actors in Pre-Crimea period.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/2_top50_comparison_Post-Crimea.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Post-Crimea Comparison</div>
+                    <div class="card-desc">
+                        Post-Crimea elite vs overall network across all attributes.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/2_top50_comparison_COVID.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">COVID Comparison</div>
+                    <div class="card-desc">
+                        COVID period elite composition vs overall network structure.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/2_top50_comparison_War.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">War Period Comparison</div>
+                    <div class="card-desc">
+                        War period elite vs overall network attribute distributions.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- ANALYSIS 3 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div class="section-title">Institutional Repurposing Analysis</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> Does the composition of sectors correspond with our impression from the TOP20 tables? Does institutional repurposing apply only to top actors or the overall network?<br>
+                Critical analysis connecting sector evolution to the institutional repurposing hypothesis.
+            </p>
+            <div class="cards">
+                <a href="visuals/3_sector_composition_table.csv" class="card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">Sector Composition Table</div>
+                    <div class="card-desc">
+                        Detailed CSV with sector counts and percentages for overall network, top 20, and top 50 across all periods.
+                    </div>
+                    <span class="card-type static">CSV Data</span>
+                </a>
+                
+                <a href="visuals/3_sector_composition_comparison.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Sector Comparison Chart</div>
+                    <div class="card-desc">
+                        Bar charts showing sector distributions: overall network, top 20, and top 50 side-by-side for each period.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- ANALYSIS 4 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div class="section-title">Clustering Trends: State vs Private</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> Are there identifiable larger trends across the four periods, such as a shift from initial clustering around private/economic actors to clustering around state/security actors?<br>
+                Examining macro-level shifts in network composition weighted by mention activity.
+            </p>
+            <div class="cards">
+                <a href="visuals/4_clustering_trends_stacked.png" class="card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Stacked Evolution (All Attributes)</div>
+                    <div class="card-desc">
+                        Four stacked area charts showing weighted composition changes for sector, state/private, actor type, and jurisdiction.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/4_state_private_evolution.png" class="card">
+                    <div class="card-icon">⚖️</div>
+                    <div class="card-title">State vs Private Evolution</div>
+                    <div class="card-desc">
+                        Detailed analysis of state/private balance by entity count and mention-weighted share across periods.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- ANALYSIS 5 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div class="section-title">Louvain Communities with Attributes</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> Do the new attributes help us make sense of the Louvain communities? Should we supplement node names with attributes?<br>
+                Revisiting community detection with attribute-based coloring and labeling.
+            </p>
+            <div class="cards">
+                <a href="visuals/5_louvain_communities_COVID.csv" class="card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">COVID Community Stats</div>
+                    <div class="card-desc">
+                        CSV with community composition, dominant sectors, top entities, and attribute distributions for COVID period.
+                    </div>
+                    <span class="card-type static">CSV Data</span>
+                </a>
+                
+                <a href="visuals/5_louvain_network_COVID.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">COVID Network (Colored by Attributes)</div>
+                    <div class="card-desc">
+                        Four views of COVID network colored by sector, state/private, actor type, and jurisdiction.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/5_louvain_communities_War.csv" class="card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">War Community Stats</div>
+                    <div class="card-desc">
+                        War period community composition with attribute breakdowns and top entities per community.
+                    </div>
+                    <span class="card-type static">CSV Data</span>
+                </a>
+                
+                <a href="visuals/5_louvain_network_War.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">War Network (Colored by Attributes)</div>
+                    <div class="card-desc">
+                        Four-panel War period network visualization with attribute-based coloring.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- ANALYSIS 6 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <div class="section-title">Attribute-Based Clustering</div>
+            </div>
+            <p class="section-desc">
+                <strong>Research Question:</strong> What clusters emerge if we use attributes for community detection? Are there health clusters, diplomacy clusters, etc.?<br>
+                Discovering whether attributes explain network structure better than pure topological community detection.
+            </p>
+            <div class="cards">
+                <a href="interactive_visuals/3_network_by_sector.html" class="card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">Interactive Network by Sector</div>
+                    <div class="card-desc">
+                        Fully interactive network with sector-based filtering. Zoom, pan, drag nodes, and explore sector-specific sub-networks.
+                    </div>
+                    <span class="card-type">Interactive</span>
+                </a>
+                
+                <a href="visuals/6_attribute_clustering_Pre-Crimea.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Pre-Crimea Attribute Clustering</div>
+                    <div class="card-desc">
+                        Internal vs external edge analysis showing cohesion scores for sector, state/private, and actor type groupings.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_sector_networks_Pre-Crimea.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">Pre-Crimea Sector Networks</div>
+                    <div class="card-desc">
+                        Individual network visualizations for each major sector with state/private coloring.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_attribute_clustering_Post-Crimea.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Post-Crimea Attribute Clustering</div>
+                    <div class="card-desc">
+                        Cohesion analysis for Post-Crimea showing which attributes create the strongest clusters.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_sector_networks_Post-Crimea.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">Post-Crimea Sector Networks</div>
+                    <div class="card-desc">
+                        Sector-specific network diagrams for Post-Crimea period.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_attribute_clustering_COVID.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">COVID Attribute Clustering</div>
+                    <div class="card-desc">
+                        COVID period clustering analysis with cohesion scores by attribute.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_sector_networks_COVID.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">COVID Sector Networks</div>
+                    <div class="card-desc">
+                        COVID period sector-specific sub-network visualizations.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_attribute_clustering_War.png" class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">War Attribute Clustering</div>
+                    <div class="card-desc">
+                        War period cohesion analysis across all three main attributes.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+                
+                <a href="visuals/6_sector_networks_War.png" class="card">
+                    <div class="card-icon">🕸️</div>
+                    <div class="card-title">War Sector Networks</div>
+                    <div class="card-desc">
+                        War period sector-level network structure and connections.
+                    </div>
+                    <span class="card-type static">Static PNG</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- MAIN NETWORK -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">★</div>
+                <div class="section-title">Main Interactive Network</div>
+            </div>
+            <p class="section-desc">
+                <strong>Complete network visualization</strong> with all filtering capabilities: period, sector, state/private, actor type, and jurisdiction.<br>
+                Self-contained HTML with embedded data—no external dependencies required.
+            </p>
+            <div class="cards">
+                <a href="index.html" class="card">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title">Full Network Dashboard</div>
+                    <div class="card-desc">
+                        Comprehensive interactive network with all attributes, period filters, zoom/pan controls, node details, and legend. Optimized for performance with 150 nodes and 10K+ edges.
+                    </div>
+                    <span class="card-type">Interactive</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Dmitriev Network Analysis Dashboard • Generated November 2025</p>
+            <p style="margin-top: 10px; font-size: 11px;">
+                All visualizations are based on network data with 150 entities and 10,334 connections<br>
+                across four periods: Pre-Crimea, Post-Crimea, COVID, and War (2010-2025)
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+

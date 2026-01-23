@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs,longtable,array,geometry,caption,siunitx}
+\geometry{margin=1in}
+\captionsetup{labelfont=bf}
+\title{Network Analysis: Top 20 Actors -- Pre-Crimea Period}
+\author{Automated SNA Report}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Methodology}
+A composite score $0.4\,\text{Degree}+0.3\,\text{Closeness}+0.2\,\text{Norm.\ Occurrences}+0.1\,\text{Edge Count}$ ranks entities. RDIF and Dmitriev entities are excluded from rankings.
+\section{Results}
+\begin{table}[htbp]
+\centering
+\caption{Top 20 actors by composite score -- Pre-Crimea Period}
+\label{tab:top20}
+\begin{tabular}{r l S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] r r}
+\toprule
+Rank & Actor & {Composite} & {Degree} & {Closeness} & Occurrences & {Edge Count}\\
+\midrule
+1 & Внешэкономбанк (ВЭБ) & 0.6692 & 0.7532 & 0.2154 & 4792740 & 20625 \\
+2 & Владимир Путин & 0.6539 & 0.7545 & 0.2168 & 7335468 & 13505 \\
+3 & Дмитрий Медведев & 0.6497 & 0.7609 & 0.2155 & 1615328 & 13897 \\
+4 & Сбербанк & 0.6261 & 0.7097 & 0.2170 & 1354704 & 13223 \\
+5 & Московская биржа & 0.6198 & 0.6893 & 0.2182 & 1886918 & 13491 \\
+6 & Министерство финансов & 0.6108 & 0.6790 & 0.2176 & 945035 & 12660 \\
+7 & ОАО «РЖД» & 0.5923 & 0.6535 & 0.2131 & 1008378 & 12097 \\
+8 & ОАО «Газпром» & 0.5806 & 0.6304 & 0.2182 & 429906 & 9738 \\
+9 & Европейский банк реконструкции и развития (ЕБРР) & 0.5716 & 0.5818 & 0.2350 & 365670 & 7118 \\
+10 & Банк ВТБ & 0.5715 & 0.5806 & 0.2318 & 742392 & 8523 \\
+11 & Совет Федерации & 0.5709 & 0.6061 & 0.2169 & 524160 & 10691 \\
+12 & МВД & 0.5501 & 0.5780 & 0.2181 & 115081 & 7567 \\
+13 & ОАО «Ростелеком» & 0.5494 & 0.5614 & 0.2248 & 722081 & 6836 \\
+14 & Российская академия наук (РАН) & 0.5449 & 0.5614 & 0.2160 & 175028 & 9183 \\
+15 & Федеральная антимонопольная служба (ФАС) & 0.5395 & 0.5422 & 0.2231 & 250750 & 7313 \\
+16 & Игорь Шувалов & 0.5311 & 0.5243 & 0.2222 & 720824 & 7413 \\
+17 & Общественная палата & 0.5273 & 0.5115 & 0.2257 & 47615 & 6865 \\
+18 & ПАО «МТС» & 0.5268 & 0.5166 & 0.2239 & 1432728 & 6088 \\
+19 & Международный валютный фонд (МВФ) & 0.5259 & 0.5217 & 0.2225 & 230786 & 6044 \\
+20 & Генеральная Ассамблея ООН & 0.5221 & 0.5166 & 0.2210 & 205437 & 6196 \\\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

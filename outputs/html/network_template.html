@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enhanced Network Analyzer V3 - Combined Periods Analysis</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 380px;
+            background: rgba(15, 15, 35, 0.95);
+            border-right: 2px solid #3498db;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.3);
+        }
+        
+        .network-area {
+            flex: 1;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            color: #bdc3c7;
+            font-size: 12px;
+        }
+        
+        .section {
+            margin-bottom: 15px;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .section h3 {
+            color: #3498db;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 7px 10px;
+            margin: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1f4e79);
+            transform: translateY(-1px);
+        }
+        
+        .btn.active {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+        }
+        
+        .filter-tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .filter-tag:hover {
+            background: #2980b9;
+        }
+        
+        #active-filters {
+            margin-bottom: 10px;
+            min-height: 30px;
+        }
+        
+        .btn.russian {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .btn.international {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+        
+        .period-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+        
+        .actor-type-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin: 8px 0;
+        }
+        
+        .stat-card {
+            background: rgba(44, 62, 80, 0.6);
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .slider-container {
+            margin: 8px 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: #ecf0f1;
+            font-weight: 600;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #34495e;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            cursor: pointer;
+            border: 2px solid #ffffff;
+        }
+        
+        .search-box, .select-box {
+            width: 100%;
+            padding: 6px;
+            border: 2px solid #34495e;
+            border-radius: 4px;
+            background: rgba(44, 62, 80, 0.8);
+            color: white;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+        
+        .search-box:focus, .select-box:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        #network {
+            width: 100%;
+            height: 100vh;
+            background: #0a0a1a;
+        }
+        
+        .node-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 15, 35, 0.95);
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            font-size: 12px;
+            max-width: 350px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header">
+                <h1>Enhanced Network Analyzer V3</h1>
+                <div class="subtitle">Combined Periods Analysis</div>
+            </div>
+            
+            <div class="section">
+                <h3>Active Filters</h3>
+                <div id="active-filters"></div>
+            </div>
+            
+            <div class="section">
+                <h3>Network Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="node-count">0</div>
+                        <div class="stat-label">Nodes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="edge-count">0</div>
+                        <div class="stat-label">Edges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="russian-count">0</div>
+                        <div class="stat-label">Russian (150+)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="international-count">0</div>
+                        <div class="stat-label">International</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Time Periods</h3>
+                <div class="period-grid">
+                    <button class="btn" onclick="filterByPeriod('pre_crimea')">Pre-Crimea</button>
+                    <button class="btn" onclick="filterByPeriod('post_crimea')">Post-Crimea</button>
+                    <button class="btn" onclick="filterByPeriod('covid')">COVID</button>
+                    <button class="btn" onclick="filterByPeriod('war')">War</button>
+                </div>
+                <button class="btn secondary" onclick="showAllPeriods()" style="width: 100%; margin-top: 5px;">Show All Periods</button>
+            </div>
+            
+            <div class="section">
+                <h3>Actor Classification</h3>
+                <div class="actor-type-grid">
+                    <button class="btn russian" onclick="filterByActorType('Russian')">Russian Actors (RUS, 150+ occurrences)</button>
+                    <button class="btn international" onclick="filterByActorType('International')">International Actors (Non-RUS, All)</button>
+                    <button class="btn" onclick="filterByActorType('all')" style="margin-top: 5px;">Show Both Types</button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Filter by Connections</h3>
+                <div class="filter-grid">
+                    <button class="btn" onclick="filterByDegree(1)">All</button>
+                    <button class="btn" onclick="filterByDegree(5)">5+</button>
+                    <button class="btn" onclick="filterByDegree(10)">10+</button>
+                    <button class="btn" onclick="filterByDegree(15)">15+</button>
+                    <button class="btn" onclick="filterByDegree(25)">25+</button>
+                    <button class="btn" onclick="filterByDegree(50)">50+</button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Filter by Edge Weight</h3>
+                <div class="filter-grid">
+                    <button class="btn" onclick="filterByWeight(1)">1+</button>
+                    <button class="btn" onclick="filterByWeight(3)">3+</button>
+                    <button class="btn" onclick="filterByWeight(8)">8+</button>
+                    <button class="btn" onclick="filterByWeight(15)">15+</button>
+                    <button class="btn" onclick="filterByWeight(25)">25+</button>
+                    <button class="btn" onclick="filterByWeight(50)">50+</button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Top Nodes by Importance</h3>
+                <div class="filter-grid">
+                    <button class="btn" onclick="showTopNodes(50)">Top 50</button>
+                    <button class="btn" onclick="showTopNodes(100)">Top 100</button>
+                    <button class="btn" onclick="showTopNodes(200)">Top 200</button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>View Controls</h3>
+                <button class="btn" onclick="resetView()">Reset View</button>
+                <button class="btn secondary" onclick="fitNetwork()">Fit Network</button><br>
+                <button class="btn secondary" onclick="togglePhysics()" id="physics-btn">Stop Physics</button>
+                <button class="btn secondary" onclick="exportData()">Export Data</button>
+            </div>
+            
+            <div class="section">
+                <h3>Node Spacing</h3>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Distance</span>
+                        <span id="spacing-value">120</span>px
+                    </div>
+                    <input type="range" class="slider" id="spacing-slider" 
+                           min="80" max="300" value="120" 
+                           oninput="adjustSpacing(this.value)">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Search Entities</h3>
+                <input type="text" class="search-box" id="search-input" 
+                       placeholder="Search entities..." 
+                       onkeypress="if(event.key==='Enter') searchNodes()">
+                <button class="btn" onclick="searchNodes()" style="width: 100%;">Search</button>
+            </div>
+        </div>
+        
+        <div class="network-area">
+            <div id="network"></div>
+            <div id="node-info" class="node-info"></div>
+        </div>
+    </div>
+
+    <script>
+        // Embedded data will be replaced by Python
+        const allNodesData = {nodes_json};
+        const allEdgesData = {edges_json};
+        
+        // Network variables
+        let network;
+        let nodes, edges;
+        let allNodes, allEdges;
+        let physicsEnabled = true;
+        let currentNodeLimit = 2000;
+        let selectedNodeId = null;
+        let connectedNodes = new Set();
+        let connectedEdges = new Set();
+        
+        // Filter state
+        let activeFilters = {
+            periods: new Set(),
+            actorTypes: new Set(),
+            minDegree: 1,
+            minWeight: 1,
+            topNodes: null,
+            searchTerm: null
+        };
+        
+        // Initialize network
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNetwork();
+            updateStats();
+        });
+        
+        function initializeNetwork() {
+            // Create datasets
+            allNodes = new vis.DataSet(allNodesData);
+            allEdges = new vis.DataSet(allEdgesData);
+            
+            nodes = new vis.DataSet(allNodesData);
+            edges = new vis.DataSet(allEdgesData);
+            
+            // Network options
+            const options = {
+                physics: {
+                    enabled: true,
+                    barnesHut: {
+                        gravitationalConstant: -2000,
+                        centralGravity: 0.1,
+                        springLength: 120,
+                        springConstant: 0.04,
+                        damping: 0.15,
+                        avoidOverlap: 0.3
+                    }
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 200,
+                    hideEdgesOnDrag: true,
+                    hideEdgesOnZoom: true
+                },
+                nodes: {
+                    shape: 'dot',
+                    borderWidth: 2,
+                    borderWidthSelected: 3,
+                    font: {
+                        color: '#ffffff',
+                        size: 11
+                    },
+                    shadow: {
+                        enabled: true,
+                        color: 'rgba(0,0,0,0.5)',
+                        size: 5
+                    }
+                },
+                edges: {
+                    smooth: {
+                        type: 'continuous',
+                        forceDirection: 'none'
+                    },
+                    shadow: {
+                        enabled: true,
+                        color: 'rgba(0,0,0,0.5)',
+                        size: 3
+                    }
+                }
+            };
+            
+            // Create network
+            const container = document.getElementById('network');
+            network = new vis.Network(container, {nodes: nodes, edges: edges}, options);
+            
+            // Event handlers
+            network.on('click', function(params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    highlightNodeAndConnections(nodeId);
+                    showNodeDetails(nodeId);
+                } else {
+                    clearHighlight();
+                    hideNodeDetails();
+                }
+            });
+            
+            network.on('stabilizationProgress', function(params) {
+                const progress = Math.round(params.iterations / params.total * 100);
+                console.log('Stabilization progress:', progress + '%');
+            });
+            
+            network.on('stabilizationIterationsDone', function() {
+                console.log('Stabilization finished');
+                network.setOptions({physics: {enabled: false}});
+                document.getElementById('physics-btn').textContent = 'Start Physics';
+                physicsEnabled = false;
+            });
+        }
+        
+        function updateStats() {
+            const currentNodes = nodes.get();
+            const currentEdges = edges.get();
+            
+            document.getElementById('node-count').textContent = currentNodes.length;
+            document.getElementById('edge-count').textContent = currentEdges.length;
+            
+            const russianCount = currentNodes.filter(n => n.is_russian).length;
+            const internationalCount = currentNodes.filter(n => !n.is_russian).length;
+            
+            document.getElementById('russian-count').textContent = russianCount;
+            document.getElementById('international-count').textContent = internationalCount;
+        }
+        
+        function highlightNodeAndConnections(nodeId) {
+            clearHighlight();
+            selectedNodeId = nodeId;
+            
+            const connectedEdgeIds = network.getConnectedEdges(nodeId);
+            const connectedNodeIds = network.getConnectedNodes(nodeId);
+            
+            nodes.update(nodes.get().map(node => ({
+                ...node,
+                color: {
+                    ...node.color,
+                    opacity: node.id === nodeId || connectedNodeIds.includes(node.id) ? 1 : 0.2
+                }
+            })));
+            
+            edges.update(edges.get().map(edge => ({
+                ...edge,
+                color: connectedEdgeIds.includes(edge.id) ? '#ffff00' : '#95a5a6',
+                opacity: connectedEdgeIds.includes(edge.id) ? 1 : 0.1,
+                width: connectedEdgeIds.includes(edge.id) ? edge.width + 2 : edge.width
+            })));
+        }
+        
+        function clearHighlight() {
+            if (selectedNodeId) {
+                nodes.update(nodes.get().map(node => ({
+                    ...node,
+                    color: {
+                        ...node.color,
+                        opacity: 1
+                    }
+                })));
+                
+                edges.update(edges.get().map(edge => ({
+                    ...edge,
+                    color: '#95a5a6',
+                    opacity: 1,
+                    width: edge.originalWidth || edge.width
+                })));
+                
+                selectedNodeId = null;
+            }
+        }
+        
+        function showNodeDetails(nodeId) {
+            const node = nodes.get(nodeId);
+            if (!node) return;
+            
+            const nodeInfo = document.getElementById('node-info');
+            nodeInfo.innerHTML = `
+                <h4 style="color: #3498db; margin-bottom: 10px;">${node.original_label}</h4>
+                <div><strong>Jurisdiction:</strong> ${node.Jurisdiction}</div>
+                <div><strong>Entity Type:</strong> ${node.Entity_Type}</div>
+                <div><strong>Occurrences:</strong> ${node.occurrences}</div>
+                <div><strong>Importance:</strong> ${node.importance}</div>
+                <div><strong>Degree:</strong> ${node.degree}</div>
+                <div><strong>Community:</strong> ${node.community}</div>
+                <div><strong>Periods:</strong> ${node.periods.join(', ')}</div>
+            `;
+            nodeInfo.style.display = 'block';
+        }
+        
+        function hideNodeDetails() {
+            document.getElementById('node-info').style.display = 'none';
+        }
+        
+        function filterByPeriod(period) {
+            if (activeFilters.periods.has(period)) {
+                activeFilters.periods.delete(period);
+            } else {
+                activeFilters.periods.add(period);
+            }
+            applyFilters();
+        }
+        
+        function filterByActorType(type) {
+            if (type === 'all') {
+                activeFilters.actorTypes.clear();
+            } else if (activeFilters.actorTypes.has(type)) {
+                activeFilters.actorTypes.delete(type);
+            } else {
+                activeFilters.actorTypes.add(type);
+            }
+            applyFilters();
+        }
+        
+        function filterByDegree(minDegree) {
+            activeFilters.minDegree = minDegree;
+            applyFilters();
+        }
+        
+        function filterByWeight(minWeight) {
+            activeFilters.minWeight = minWeight;
+            applyFilters();
+        }
+        
+        function showTopNodes(count) {
+            activeFilters.topNodes = count;
+            applyFilters();
+        }
+        
+        function applyFilters() {
+            let filteredNodes = allNodesData;
+            
+            // Apply period filters
+            if (activeFilters.periods.size > 0) {
+                filteredNodes = filteredNodes.filter(node =>
+                    node.periods.some(period => activeFilters.periods.has(period))
+                );
+            }
+            
+            // Apply actor type filters
+            if (activeFilters.actorTypes.size > 0) {
+                filteredNodes = filteredNodes.filter(node => {
+                    if (activeFilters.actorTypes.has('Russian')) {
+                        return node.is_russian;
+                    }
+                    if (activeFilters.actorTypes.has('International')) {
+                        return !node.is_russian;
+                    }
+                    return true;
+                });
+            }
+            
+            // Apply degree filter
+            if (activeFilters.minDegree > 1) {
+                filteredNodes = filteredNodes.filter(node => node.degree >= activeFilters.minDegree);
+            }
+            
+            // Apply top nodes filter
+            if (activeFilters.topNodes) {
+                filteredNodes = filteredNodes
+                    .sort((a, b) => b.importance - a.importance)
+                    .slice(0, activeFilters.topNodes);
+            }
+            
+            // Update visualization
+            const nodeIds = new Set(filteredNodes.map(n => n.id));
+            const filteredEdges = allEdgesData.filter(edge =>
+                nodeIds.has(edge.from) && nodeIds.has(edge.to) &&
+                edge.weight >= activeFilters.minWeight
+            );
+            
+            nodes.clear();
+            edges.clear();
+            nodes.add(filteredNodes);
+            edges.add(filteredEdges);
+            
+            updateStats();
+            network.fit();
+        }
+        
+        function resetView() {
+            activeFilters = {
+                periods: new Set(),
+                actorTypes: new Set(),
+                minDegree: 1,
+                minWeight: 1,
+                topNodes: null,
+                searchTerm: null
+            };
+            nodes.clear();
+            edges.clear();
+            nodes.add(allNodesData);
+            edges.add(allEdgesData);
+            updateStats();
+            network.fit();
+        }
+        
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            network.setOptions({physics: {enabled: physicsEnabled}});
+            document.getElementById('physics-btn').textContent = 
+                physicsEnabled ? 'Stop Physics' : 'Start Physics';
+        }
+        
+        function adjustSpacing(value) {
+            const spacing = parseInt(value);
+            network.setOptions({
+                physics: {
+                    barnesHut: {
+                        springLength: spacing
+                    }
+                }
+            });
+            document.getElementById('spacing-value').textContent = spacing;
+        }
+        
+        function searchNodes() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            if (!searchTerm) {
+                resetView();
+                return;
+            }
+            
+            const matchingNodes = allNodesData.filter(node =>
+                node.label.toLowerCase().includes(searchTerm) ||
+                node.Jurisdiction.toLowerCase().includes(searchTerm) ||
+                node.Entity_Type.toLowerCase().includes(searchTerm)
+            );
+            
+            if (matchingNodes.length === 0) {
+                alert('No matching nodes found');
+                return;
+            }
+            
+            const nodeIds = new Set(matchingNodes.map(n => n.id));
+            const matchingEdges = allEdgesData.filter(edge =>
+                nodeIds.has(edge.from) && nodeIds.has(edge.to)
+            );
+            
+            nodes.clear();
+            edges.clear();
+            nodes.add(matchingNodes);
+            edges.add(matchingEdges);
+            
+            updateStats();
+            network.fit();
+        }
+        
+        function fitNetwork() {
+            network.fit();
+        }
+        
+        function exportData() {
+            const data = {
+                nodes: nodes.get(),
+                edges: edges.get(),
+                filters: activeFilters
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'network_data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
